@@ -1,0 +1,173 @@
+/* ===================================
+   TOPLCR Landing Page - Custom CSS
+   ===================================  */
+
+/* CSS Custom Properties (Color Variables) */
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #1ABC9C;
+    --accent-color: #FF6B35;
+    --dark-text: #333333;
+    --light-background: #f8f9fa;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--dark-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Section Padding Utilities */
+section {
+    padding: 80px 0;
+}
+
+/* Responsive Padding for Mobile Devices */
+@media (max-width: 768px) {
+    section {
+        padding: 40px 0;
+    }
+}
+
+/* Test Section Styling */
+.test-section {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 4px solid var(--accent-color);
+}
+
+.test-section h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.test-section p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--light-background);
+}
+
+/* Problem-Solution Section */
+.problem-solution-section {
+    background-color: var(--primary-color);
+}
+
+/* Benefits Section */
+.benefits-section {
+    background-color: var(--light-background);
+}
+
+/* How It Works Section */
+.how-it-works-section {
+    background-color: var(--primary-color);
+}
+
+/* Credibility Section */
+.credibility-section {
+    background-color: var(--light-background);
+}
+
+/* FAQ Section */
+.faq-section {
+    background-color: var(--primary-color);
+}
+
+/* Contact Form Section */
+.contact-form-section {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Footer Section */
+.footer-section {
+    background-color: var(--dark-text);
+    color: var(--primary-color);
+    padding: 40px 0;
+    margin-top: 80px;
+}
+
+/* Accent Color Utilities */
+.accent-text {
+    color: var(--accent-color);
+}
+
+.accent-border {
+    border-color: var(--accent-color);
+}
+
+.accent-bg {
+    background-color: var(--accent-color);
+}
+
+.secondary-text {
+    color: var(--secondary-color);
+}
+
+.secondary-bg {
+    background-color: var(--secondary-color);
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-secondary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Container Padding */
+.container {
+    padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+}
