@@ -334,8 +334,129 @@
     </section>
 
     <!-- CONTACT FORM SECTION -->
-    <section class="contact-form-section">
-        <!-- Contact form will go here -->
+    <section id="contact-form" class="contact-form-section py-5">
+        <div class="container">
+            <!-- Centered Heading -->
+            <h2 class="contact-heading mb-5">Ready to Save 2-3 Hours Every Day?</h2>
+            
+            <!-- Contact Form Container -->
+            <div class="contact-form-wrapper">
+                <!-- Form Messages Container (hidden by default) -->
+                <div id="formMessages" class="form-messages-container"></div>
+                
+                <!-- Main Contact Form -->
+                <form id="contactForm" class="contact-form" novalidate>
+                    <!-- Name Field -->
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Full Name</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="userName" 
+                            name="userName"
+                            placeholder="John Smith" 
+                            required
+                            minlength="2"
+                            aria-label="Full Name"
+                            aria-required="true"
+                        >
+                        <small class="form-error-text" id="userNameError"></small>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Work Email</label>
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            id="userEmail" 
+                            name="userEmail"
+                            placeholder="john@company.com" 
+                            required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                            aria-label="Work Email"
+                            aria-required="true"
+                        >
+                        <small class="form-error-text" id="userEmailError"></small>
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div class="mb-3">
+                        <label for="userPhone" class="form-label">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            class="form-control" 
+                            id="userPhone" 
+                            name="userPhone"
+                            placeholder="+1234567890" 
+                            required
+                            pattern="[0-9]{10,15}"
+                            aria-label="Phone Number"
+                            aria-required="true"
+                        >
+                        <small class="form-error-text" id="userPhoneError"></small>
+                    </div>
+
+                    <!-- Message Field (Optional) -->
+                    <div class="mb-3">
+                        <label for="userMessage" class="form-label">How can we help? (Optional)</label>
+                        <textarea 
+                            class="form-control" 
+                            id="userMessage" 
+                            name="userMessage"
+                            placeholder="Tell us about your telecom sales challenges..." 
+                            rows="4"
+                            aria-label="Message"
+                        ></textarea>
+                        <small class="form-error-text" id="userMessageError"></small>
+                    </div>
+
+                    <!-- Math CAPTCHA Field -->
+                    <div class="mb-3">
+                        <label for="captchaAnswer" class="form-label">Human verification: What is 5 + 3?</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="captchaAnswer" 
+                            name="captchaAnswer"
+                            placeholder="Enter answer" 
+                            required
+                            aria-label="CAPTCHA Answer"
+                            aria-required="true"
+                        >
+                        <small class="form-error-text" id="captchaAnswerError"></small>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        id="submitButton" 
+                        class="btn btn-lg w-100 submit-button"
+                        aria-label="Request FREE Credits"
+                    >
+                        Request FREE Credits Now
+                    </button>
+                </form>
+
+                <!-- Trust Indicators -->
+                <div class="trust-indicators mt-4">
+                    <ul class="trust-list">
+                        <li>
+                            <span class="checkmark">✓</span>
+                            <span>No credit card required</span>
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            <span>10-20 free operations included</span>
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            <span>Get activated within 24 hours</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- FOOTER SECTION -->
