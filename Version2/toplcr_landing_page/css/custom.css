@@ -858,3 +858,78 @@ section {
     padding: 40px;
     border-bottom: 4px solid var(--color-accent);
 }
+
+/* --------------------------------------------------------------------------
+   Footer Section
+   -------------------------------------------------------------------------- */
+.footer-section {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    padding: 40px 0;
+    border-top: 4px solid var(--color-secondary);
+}
+
+.footer-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #ffffff;
+}
+
+.footer-link {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+.footer-stats {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.footer-highlight {
+    color: var(--color-secondary);
+    font-weight: 700;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* --- Footer Responsive --- */
+@media (max-width: 767.98px) {
+    .footer-section {
+        padding: 30px 0;
+    }
+
+    .footer-section .col-12 {
+        margin-bottom: 20px;
+    }
+
+    .footer-section .col-12:last-child {
+        margin-bottom: 0;
+    }
+
+    .footer-heading {
+        margin-bottom: 10px;
+    }
+
+    .footer-stats {
+        font-size: 15px;
+    }
+}
