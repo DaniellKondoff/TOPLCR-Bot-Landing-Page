@@ -81,12 +81,12 @@ function initializeContactFormValidation() {
     // Form submission handler
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         // Clear previous messages
         if (formMessages) {
             formMessages.innerHTML = '';
         }
-        
+
         // Check honeypot - if filled, silently reject (bot detected)
         if (!validateHoneypot()) {
             console.warn('Honeypot field detected - submission blocked');
@@ -95,50 +95,59 @@ function initializeContactFormValidation() {
             generateDynamicCaptcha();
             return;
         }
-        
+
         // Check submission timing - reject if too fast
         if (!validateSubmissionTiming()) {
             showErrorMessage(formMessages, 'Please wait a moment before submitting again.');
             return;
         }
-        
+
         // Validate all fields
         const isNameValid = validateNameField();
         const isEmailValid = validateEmailField();
         const isPhoneValid = validatePhoneField();
         const isCaptchaValid = validateCaptchaField();
-        
+
         // If all validations pass
         if (isNameValid && isEmailValid && isPhoneValid && isCaptchaValid) {
-            // TODO: Hook into your backend API endpoint here
-            // Example:
-            // submitFormToBackend(contactForm);
-            
-            // Show success message
-            showSuccessMessage(formMessages, 'Thank you! Your request has been received. We\'ll contact you within 24 hours.');
-            
-            // Update last submission time
-            formTimingData.lastSubmissionTime = Date.now();
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Generate new CAPTCHA for next submission
-            generateDynamicCaptcha();
-            
-            // Remove is-valid classes
-            [nameInput, emailInput, phoneInput, messageInput, captchaInput].forEach(input => {
-                if (input) input.classList.remove('is-valid');
-            });
-            
-            // Log for debugging (remove in production)
-            console.log('Form submitted with data:', {
-                name: nameInput.value,
-                email: emailInput.value,
-                phone: phoneInput.value,
-                message: messageInput.value,
-                captcha: captchaInput.value
-            });
+            // Show loading spinner and disable button
+            showLoadingSpinner(submitButton, true);
+
+            // Simulate form submission delay (remove in production with actual API call)
+            setTimeout(() => {
+                // TODO: Hook into your backend API endpoint here
+                // Example:
+                // submitFormToBackend(contactForm);
+
+                // Hide loading spinner and re-enable button
+                showLoadingSpinner(submitButton, false);
+
+                // Show success message
+                showSuccessMessage(formMessages, 'Thank you! Your request has been received. We\'ll contact you within 24 hours.');
+
+                // Update last submission time
+                formTimingData.lastSubmissionTime = Date.now();
+
+                // Reset form
+                contactForm.reset();
+
+                // Generate new CAPTCHA for next submission
+                generateDynamicCaptcha();
+
+                // Remove is-valid classes
+                [nameInput, emailInput, phoneInput, messageInput, captchaInput].forEach(input => {
+                    if (input) input.classList.remove('is-valid');
+                });
+
+                // Log for debugging (remove in production)
+                console.log('Form submitted with data:', {
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    phone: phoneInput.value,
+                    message: messageInput.value,
+                    captcha: captchaInput.value
+                });
+            }, 1000); // 1 second delay to show spinner (remove in production)
         } else {
             // Show error message
             showErrorMessage(formMessages, 'Please fix the errors above and try again.');
@@ -412,15 +421,45 @@ function showSuccessMessage(container, message) {
  */
 function showErrorMessage(container, message) {
     if (!container) return;
-    
+
     const errorDiv = document.createElement('div');
     errorDiv.className = 'form-error-message show';
     errorDiv.setAttribute('role', 'alert');
     errorDiv.setAttribute('aria-live', 'polite');
     errorDiv.innerHTML = `<strong>Error!</strong> ${message}`;
-    
+
     container.innerHTML = '';
     container.appendChild(errorDiv);
+}
+
+/**
+ * Show or hide loading spinner on submit button
+ * @param {HTMLElement} button - The submit button element
+ * @param {boolean} show - True to show spinner, false to hide
+ */
+function showLoadingSpinner(button, show) {
+    if (!button) return;
+
+    if (show) {
+        // Store original button text
+        button.setAttribute('data-original-text', button.textContent);
+
+        // Disable button
+        button.disabled = true;
+
+        // Add spinner and loading text
+        button.innerHTML = `
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Processing...
+        `;
+    } else {
+        // Re-enable button
+        button.disabled = false;
+
+        // Restore original text
+        const originalText = button.getAttribute('data-original-text') || 'Request FREE Credits Now';
+        button.textContent = originalText;
+    }
 }
 
 /**
