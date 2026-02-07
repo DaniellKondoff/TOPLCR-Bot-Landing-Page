@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TOPLCR - Your AI-powered Telegram bot assistant for telecom sales professionals. Boost productivity, manage leads, and close deals faster.">
+    <meta name="description" content="Free Telegram bot assistant for telecom sales. Save 2-3 hours daily on routine tasks. 20 years expertise. Try 10-20 operations free.">
     <meta name="keywords" content="TOPLCR, Telegram bot, telecom sales, sales assistant, lead management">
     <meta name="author" content="TOPLCR">
 
     <title>TOPLCR - Telegram Bot for Telecom Sales</title>
 
-   <!-- Bootstrap 5.3.x CSS from jsDelivr CDN -->
+    <!-- Preconnect to CDN for better performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Bootstrap 5.3.x CSS from jsDelivr CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Font Awesome 6.4.0 CSS from CDN -->
@@ -32,7 +36,8 @@
                 <div class="ratio ratio-16x9">
                     <!-- Replace PLACEHOLDER_VIDEO_ID with actual YouTube video ID -->
                     <iframe src="https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID"
-                            title="TOPLCR Bot Demo"
+                            title="TOPLCR Bot Demo - Watch how to automate telecom sales tasks"
+                            loading="lazy"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen
                             class="shadow-lg rounded"></iframe>
@@ -374,6 +379,7 @@
                         <label for="userName" class="form-label">Name <span class="required-star">*</span></label>
                         <input type="text" class="form-control" id="userName" name="userName"
                                placeholder="John Smith" required minlength="2"
+                               aria-label="Your full name"
                                aria-describedby="userNameError">
                         <div id="userNameError" class="invalid-feedback">
                             <!-- JS validation message -->
@@ -386,6 +392,7 @@
                         <input type="email" class="form-control" id="userEmail" name="userEmail"
                                placeholder="john@company.com" required
                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                               aria-label="Your email address"
                                aria-describedby="userEmailError">
                         <div id="userEmailError" class="invalid-feedback">
                             <!-- JS validation message -->
@@ -398,6 +405,7 @@
                         <input type="tel" class="form-control" id="userPhone" name="userPhone"
                                placeholder="+1 (555) 123-4567" required
                                pattern="[0-9]{7,15}"
+                               aria-label="Your phone number"
                                aria-describedby="userPhoneError">
                         <div id="userPhoneError" class="invalid-feedback">
                             <!-- JS validation message -->
@@ -409,7 +417,8 @@
                         <label for="userMessage" class="form-label">How can we help? (Optional)</label>
                         <textarea class="form-control" id="userMessage" name="userMessage"
                                   placeholder="Tell us about your telecom sales challenges..."
-                                  rows="4"></textarea>
+                                  rows="4"
+                                  aria-label="Additional message or questions about TOPLCR"></textarea>
                     </div>
 
                     <!-- Math CAPTCHA -->
@@ -417,6 +426,7 @@
                         <label for="captchaAnswer" class="form-label">Human verification: <span id="captchaQuestion">What is 5 + 3?</span> <span class="required-star">*</span></label>
                         <input type="text" class="form-control" id="captchaAnswer" name="captchaAnswer"
                                placeholder="Enter answer" required
+                               aria-label="Math captcha answer for human verification"
                                aria-describedby="captchaError">
                         <div id="captchaError" class="invalid-feedback">
                             <!-- JS validation message -->

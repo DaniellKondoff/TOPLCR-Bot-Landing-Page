@@ -849,17 +849,6 @@ section {
 }
 
 /* --------------------------------------------------------------------------
-   Test Section (verification — remove after Phase 1)
-   -------------------------------------------------------------------------- */
-.test-section {
-    background-color: var(--color-secondary);
-    color: var(--color-primary);
-    text-align: center;
-    padding: 40px;
-    border-bottom: 4px solid var(--color-accent);
-}
-
-/* --------------------------------------------------------------------------
    Footer Section
    -------------------------------------------------------------------------- */
 .footer-section {
@@ -1294,24 +1283,135 @@ html {
 }
 
 /* --------------------------------------------------------------------------
-   ACCESSIBILITY IMPROVEMENTS
+   ACCESSIBILITY IMPROVEMENTS - Focus States for Keyboard Navigation
    -------------------------------------------------------------------------- */
 
-/* --- Focus States: Visible for keyboard navigation --- */
+/* --- General focus states for interactive elements --- */
 a:focus,
 button:focus,
 .btn:focus,
 .form-control:focus,
 .form-check-input:focus,
-.accordion-button:focus {
+.accordion-button:focus,
+input:focus,
+textarea:focus,
+select:focus {
     outline: 3px solid var(--color-secondary) !important;
     outline-offset: 2px !important;
 }
+
+/* --- CTA Button focus state --- */
+.cta-button:focus {
+    outline: 3px solid var(--color-secondary) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3), 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.cta-button:focus:hover {
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3), 0 6px 20px rgba(26, 188, 156, 0.4);
+}
+
+/* --- Form controls focus state --- */
+.contact-section .form-control:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.25), 0 0 0 4px rgba(26, 188, 156, 0.1);
+}
+
+.consent-check .form-check-input:focus {
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.25), 0 0 0 4px rgba(26, 188, 156, 0.1);
+    border-color: var(--color-secondary);
+}
+
+/* --- FAQ accordion buttons focus --- */
+.faq-button:focus {
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.25);
+    outline: none;
+}
+
+/* --- Footer links focus state --- */
+.footer-link:focus {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+}
+
+/* --- Card hover and focus states --- */
+.ps-card:focus-within {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.operation-card:focus-within {
+    box-shadow: 0 8px 16px rgba(26, 188, 156, 0.15);
+    border-color: var(--color-secondary);
+}
+
+/* --- Button focus states --- */
+.contact-submit-btn:focus {
+    outline: 3px solid var(--color-secondary) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.25);
+}
+
+.contact-submit-btn:focus:hover {
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   FORM SPINNER LOADING STATE
+   -------------------------------------------------------------------------- */
+
+.contact-submit-btn[disabled] {
+    opacity: 0.9;
+    cursor: not-allowed;
+}
+
+/* Bootstrap spinner customization for submit button */
+.contact-submit-btn .spinner-border {
+    border-width: 0.2em;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+}
+
+.contact-submit-btn .spinner-border-sm {
+    border-width: 0.15em;
+}
+
+/* --- Smooth loading state animation --- */
+@keyframes spin-loader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-border {
+    animation: spin-loader 0.75s linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY IMPROVEMENTS - Generic Styles
+   -------------------------------------------------------------------------- */
 
 /* --- Link Targets: Minimum touch target size --- */
 a {
     min-height: 24px;
     display: inline-block;
+}
+
+/* --- Skip to content (for future implementation) --- */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-secondary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    text-decoration: none;
+}
+
+.skip-to-content:focus {
+    top: 0;
 }
 
 /* --- Skip horizontal scroll in tables/pre (if added later) --- */
