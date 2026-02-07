@@ -405,124 +405,215 @@ section {
     }
 }
 
-/* Problem-Solution Section */
+/* ===================================
+   PROBLEM-SOLUTION SECTION
+   =================================== */
+
 .problem-solution-section {
-    background-color: var(--light-background);
-    padding: 80px 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 100px 0 88px;
 }
 
-/* Problem-Solution Heading */
-.problem-solution-heading {
+.problem-solution-header {
     text-align: center;
-    margin-bottom: 50px;
-    font-weight: 700;
-    color: var(--dark-text);
-    font-size: 36px;
-    line-height: 1.3;
+    max-width: 640px;
+    margin: 0 auto 56px;
 }
 
-/* Problem-Solution Cards */
+.problem-solution-eyebrow {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.problem-solution-heading {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.problem-solution-sub {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 1.125rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Grid: 3 columns desktop, 2 tablet, 1 mobile */
+.problem-solution-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .problem-solution-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+}
+
+@media (min-width: 992px) {
+    .problem-solution-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+    }
+}
+
+/* Card */
 .problem-solution-card {
-    background-color: #FFFFFF;
-    border: none;
-    border-top: 4px solid var(--secondary-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .problem-solution-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    border-color: rgba(26, 188, 156, 0.25);
 }
 
-.problem-solution-card .card-body {
-    padding: 30px;
+.problem-solution-card .ps-card-inner {
+    padding: 32px 28px;
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
-/* Card Icon */
-.card-icon {
-    text-align: center;
+/* Card icon in rounded container */
+.ps-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(26, 188, 156, 0.12) 0%, rgba(26, 188, 156, 0.06) 100%);
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-.card-icon i {
-    font-size: 60px;
-    color: var(--secondary-color);
-    display: inline-block;
+.ps-card-icon i {
+    font-size: 1.5rem;
 }
 
-/* Card Title */
-.card-title {
-    font-size: 24px;
+.ps-card-title {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--dark-text);
-    text-align: center;
-    margin-bottom: 15px;
+    color: #1e293b;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
 }
 
-/* Problem Text */
-.problem-text {
-    font-size: 16px;
-    color: #666666;
-    line-height: 1.6;
-    margin-bottom: 15px;
+/* Problem / Solution blocks */
+.ps-card-problem,
+.ps-card-solution {
+    margin-bottom: 0;
 }
 
-/* Card Divider */
-.card-divider {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 15px 0;
+.ps-card-solution {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
 }
 
-/* Solution Label */
-.solution-label {
+.ps-label {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.6875rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.ps-label-solution {
     color: var(--secondary-color);
-    margin-bottom: 10px;
-    font-size: 15px;
 }
 
-/* Solution Text */
-.solution-text {
-    font-size: 16px;
-    color: var(--dark-text);
+.ps-card-problem p,
+.ps-card-solution p {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.9375rem;
     line-height: 1.6;
+    color: #475569;
     margin: 0;
-    flex-grow: 1;
 }
 
-/* Responsive Design for Tablet */
+.ps-card-solution p {
+    color: #334155;
+    font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .problem-solution-card:hover {
+        transform: none;
+    }
+}
+
+/* Responsive: Problem-Solution */
 @media (max-width: 768px) {
     .problem-solution-section {
-        padding: 60px 0;
+        padding: 64px 0 56px;
     }
     
-    .problem-solution-heading {
-        font-size: 28px;
+    .problem-solution-header {
         margin-bottom: 40px;
     }
     
-    .problem-solution-card .card-body {
-        padding: 20px;
+    .problem-solution-heading {
+        font-size: 1.625rem;
     }
     
-    .card-icon i {
-        font-size: 50px;
+    .problem-solution-sub {
+        font-size: 1rem;
     }
     
-    .card-title {
-        font-size: 20px;
+    .problem-solution-card .ps-card-inner {
+        padding: 24px 20px;
     }
     
-    .problem-text,
-    .solution-text {
-        font-size: 15px;
+    .ps-card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .ps-card-icon i {
+        font-size: 1.25rem;
+    }
+    
+    .ps-card-title {
+        font-size: 1.125rem;
+        margin-bottom: 16px;
+    }
+    
+    .ps-card-problem p,
+    .ps-card-solution p {
+        font-size: 0.875rem;
+    }
+    
+    .ps-card-solution {
+        margin-top: 16px;
+        padding-top: 16px;
     }
 }
 
@@ -1553,34 +1644,52 @@ section {
 
     /* ===== PROBLEM-SOLUTION SECTION ===== */
     .problem-solution-section {
-        padding: 40px 0;
+        padding: 48px 0 40px;
+    }
+
+    .problem-solution-header {
+        margin-bottom: 32px;
     }
 
     .problem-solution-heading {
-        font-size: 22px;
-        margin-bottom: 30px;
+        font-size: 1.375rem;
     }
 
-    .problem-solution-card {
-        margin-bottom: 20px;
+    .problem-solution-sub {
+        font-size: 0.9375rem;
     }
 
-    .problem-solution-card .card-body {
-        padding: 16px;
+    .problem-solution-grid {
+        gap: 20px;
     }
 
-    .card-icon i {
-        font-size: 48px;
+    .problem-solution-card .ps-card-inner {
+        padding: 20px 16px;
     }
 
-    .card-title {
-        font-size: 18px;
+    .ps-card-icon {
+        width: 44px;
+        height: 44px;
         margin-bottom: 12px;
     }
 
-    .problem-text,
-    .solution-text {
-        font-size: 15px;
+    .ps-card-icon i {
+        font-size: 1.125rem;
+    }
+
+    .ps-card-title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .ps-card-problem p,
+    .ps-card-solution p {
+        font-size: 0.8125rem;
+    }
+
+    .ps-card-solution {
+        margin-top: 12px;
+        padding-top: 12px;
     }
 
     .solution-label {
@@ -1798,12 +1907,11 @@ section {
     }
 
     .problem-solution-heading {
-        font-size: 26px;
-        margin-bottom: 35px;
+        font-size: 1.625rem;
     }
 
-    .card-title {
-        font-size: 20px;
+    .ps-card-title {
+        font-size: 1.125rem;
     }
 
     .benefits-heading {
@@ -1892,14 +2000,17 @@ section {
         max-width: 320px;
     }
 
-    /* Problem-Solution: 2 columns, stack on bottom */
+    /* Problem-Solution: 2 columns */
     .problem-solution-section {
-        padding: 60px 0;
+        padding: 72px 0 64px;
+    }
+
+    .problem-solution-header {
+        margin-bottom: 48px;
     }
 
     .problem-solution-heading {
-        font-size: 32px;
-        margin-bottom: 40px;
+        font-size: 2rem;
     }
 
     .col-md-6 {
@@ -2038,14 +2149,23 @@ section {
         font-size: 0.8125rem;
     }
 
-    /* Problem-Solution 3 columns */
+    /* Problem-Solution 3 columns (section uses own grid) */
+    .problem-solution-section {
+        padding: 100px 0 88px;
+    }
+
+    .problem-solution-header {
+        margin-bottom: 56px;
+    }
+
+    /* Other sections: 3-column grid */
     .col-lg-4 {
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
     }
 
     .problem-solution-card {
-        margin-bottom: 30px;
+        margin-bottom: 0;
     }
 
     /* Buttons should maintain minimum touch targets */
