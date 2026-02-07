@@ -18,26 +18,54 @@
     <!-- Font Awesome 6.4.0 CSS from CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Google Fonts - Plus Jakarta Sans (modern, readable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Custom CSS (loaded after Bootstrap) -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
     <!-- HERO SECTION -->
-    <section id="hero" class="hero-section">
-        <div class="container">
-            <h1 class="hero-headline">Stop Wasting Time on Routine Telecom Tasks</h1>
-            <p class="hero-subheadline">Your AI sales assistant in Telegram - built by telecom veterans with 20 years of experience</p>
-            
-            <div class="video-container">
-                <div class="ratio ratio-16x9">
-                    <!-- Replace PLACEHOLDER_VIDEO_ID with actual YouTube video ID -->
-                    <iframe src="https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID" title="TOPLCR Bot Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" class="shadow-lg rounded"></iframe>
+    <section id="hero" class="hero-section" aria-label="Main value proposition">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="container position-relative">
+            <div class="hero-content">
+                <p class="hero-eyebrow">
+                    <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+                    AI for Telecom Sales
+                </p>
+                <h1 class="hero-headline">
+                    Stop Wasting Time on <span class="hero-headline-accent">Routine Telecom Tasks</span>
+                </h1>
+                <p class="hero-subheadline">
+                    Your AI sales assistant in Telegram — built by telecom veterans with 20 years of experience. Save 2–3 hours every day.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contact-form" class="btn btn-lg cta-button cta-primary">
+                        Get FREE Credits <span class="cta-sub">No credit card required</span>
+                    </a>
+                    <a href="#hero-video" class="btn btn-lg cta-button cta-secondary">
+                        <i class="fas fa-play" aria-hidden="true"></i> Watch how it works
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <span class="hero-trust-item"><i class="fas fa-shield-check" aria-hidden="true"></i> Backed by top providers</span>
+                    <span class="hero-trust-item"><i class="fas fa-clock" aria-hidden="true"></i> 2–3 hrs saved daily</span>
+                    <span class="hero-trust-item"><i class="fas fa-bolt" aria-hidden="true"></i> 10–20 free operations</span>
                 </div>
             </div>
-            
-            <button type="button" class="btn btn-lg cta-button">Get FREE Credits - No Credit Card Required</button>
-            
-            <p class="trust-badge">✓ Backed by top market providers</p>
+            <div id="hero-video" class="video-wrapper" tabindex="-1">
+                <div class="video-container">
+                    <div class="video-card">
+                        <div class="ratio ratio-16x9">
+                            <!-- Replace PLACEHOLDER_VIDEO_ID with actual YouTube video ID -->
+                            <iframe src="https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID" title="TOPLCR Bot Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
