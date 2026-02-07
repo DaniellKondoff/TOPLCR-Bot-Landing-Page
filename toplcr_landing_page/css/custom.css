@@ -1349,3 +1349,728 @@ a:hover {
         margin-top: 0.75rem;
     }
 }
+
+/* ===================================
+   ENHANCED RESPONSIVE DESIGN
+   ===================================
+   Comprehensive media queries for:
+   - Mobile (<576px): reduce font sizes, increase button padding, stack columns
+   - Tablet (576-992px): adjust hero height, 2-column grids
+   - Desktop (>992px): max-width containers, optimal spacing
+   =================================== */
+
+/* ===================================
+   MOBILE FIRST: EXTRA SMALL DEVICES (<576px)
+   =================================== */
+@media (max-width: 575.98px) {
+    /* Root level adjustments */
+    html {
+        font-size: 14px;
+    }
+
+    /* Ensure minimum text size of 16px on mobile (prevent zoom) */
+    body {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    /* All text should be readable without zoom */
+    p, li, span, label, button, input, textarea, select {
+        font-size: 16px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+        min-height: auto;
+        padding: 40px 12px;
+    }
+
+    .hero-headline {
+        font-size: 24px;
+        margin-bottom: 16px;
+        line-height: 1.3;
+    }
+
+    .hero-subheadline {
+        font-size: 16px;
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+    .video-container {
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+    /* CTA button - minimum touch target 44x44px */
+    .cta-button {
+        width: 100%;
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 24px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .trust-badge {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    /* ===== PROBLEM-SOLUTION SECTION ===== */
+    .problem-solution-section {
+        padding: 40px 0;
+    }
+
+    .problem-solution-heading {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    .problem-solution-card {
+        margin-bottom: 20px;
+    }
+
+    .problem-solution-card .card-body {
+        padding: 16px;
+    }
+
+    .card-icon i {
+        font-size: 48px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .problem-text,
+    .solution-text {
+        font-size: 15px;
+    }
+
+    .solution-label {
+        font-size: 14px;
+    }
+
+    /* Stack all columns vertically */
+    .col-lg-4, .col-md-6, .col-sm-12 {
+        flex-basis: 100%;
+    }
+
+    /* ===== BENEFITS SECTION ===== */
+    .benefits-section {
+        padding: 40px 0;
+    }
+
+    .benefits-heading {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    .benefit-card {
+        padding: 20px 16px;
+        margin-bottom: 16px;
+        /* Ensure minimum touch target */
+        min-height: auto;
+    }
+
+    .benefit-icon {
+        font-size: 56px;
+        margin-bottom: 12px;
+    }
+
+    .benefit-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .benefit-list li {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    /* ===== OPERATIONS SECTION ===== */
+    .bot-operations-section {
+        padding: 40px 0;
+    }
+
+    .operations-heading {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .operations-subheading {
+        font-size: 14px;
+        margin-bottom: 25px;
+        max-width: 100%;
+    }
+
+    .operation-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .operation-number {
+        font-size: 32px;
+        top: 12px;
+        left: 12px;
+    }
+
+    .operation-title {
+        font-size: 16px;
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+
+    .operation-description {
+        font-size: 14px;
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section {
+        padding: 40px 0;
+    }
+
+    .faq-container {
+        padding: 0 12px;
+    }
+
+    .faq-heading {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+
+    .faq-subheading {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .accordion-faq .accordion-button {
+        padding: 12px;
+        font-size: 15px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .accordion-faq .accordion-body {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* ===== CONTACT FORM SECTION ===== */
+    .contact-form-section {
+        padding: 40px 0;
+    }
+
+    .contact-heading {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    .contact-form-wrapper {
+        padding: 0 12px;
+    }
+
+    .contact-form {
+        padding: 20px;
+    }
+
+    .contact-form .form-label {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+
+    .contact-form .form-control {
+        font-size: 16px;
+        padding: 12px;
+        min-height: 44px;
+        border-radius: 4px;
+    }
+
+    .contact-form .form-control::placeholder {
+        font-size: 15px;
+    }
+
+    .contact-form textarea.form-control {
+        min-height: 100px;
+    }
+
+    .submit-button {
+        font-size: 16px;
+        min-height: 44px;
+        min-width: 44px;
+        width: 100%;
+        padding: 12px 24px;
+    }
+
+    .trust-list li {
+        font-size: 13px;
+    }
+
+    /* ===== FOOTER SECTION ===== */
+    .footer-section {
+        padding: 24px 0;
+        margin-top: 40px;
+    }
+
+    .footer-heading {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .footer-text,
+    .footer-link {
+        font-size: 13px;
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+    }
+
+    /* ===== RESPONSIVE UTILITIES FOR MOBILE ===== */
+    .show-mobile { display: block !important; }
+    .hide-mobile { display: none !important; }
+    .text-center-mobile { text-align: center !important; }
+}
+
+/* ===================================
+   SMALL DEVICES (576px - 767px)
+   =================================== */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    /* Ensure minimum text size */
+    p, li, span, label, button, input, textarea, select {
+        font-size: 15px;
+    }
+
+    .hero-section {
+        min-height: 70vh;
+        padding: 50px 16px;
+    }
+
+    .hero-headline {
+        font-size: 28px;
+    }
+
+    .hero-subheadline {
+        font-size: 16px;
+    }
+
+    .cta-button {
+        min-height: 44px;
+        min-width: 44px;
+        font-size: 15px;
+    }
+
+    .problem-solution-heading {
+        font-size: 26px;
+        margin-bottom: 35px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .benefits-heading {
+        font-size: 26px;
+        margin-bottom: 35px;
+    }
+
+    .benefit-title {
+        font-size: 18px;
+    }
+
+    .operations-heading {
+        font-size: 24px;
+    }
+
+    .faq-heading {
+        font-size: 26px;
+    }
+
+    .faq-subheading {
+        font-size: 15px;
+    }
+
+    .accordion-faq .accordion-button {
+        font-size: 15px;
+        min-height: 44px;
+        padding: 12px;
+    }
+
+    .contact-heading {
+        font-size: 26px;
+    }
+
+    .contact-form {
+        padding: 25px;
+    }
+
+    .contact-form .form-control {
+        font-size: 15px;
+        min-height: 42px;
+    }
+
+    .submit-button {
+        min-height: 44px;
+        font-size: 15px;
+    }
+
+    /* Show/hide utilities for tablet */
+    .show-tablet { display: block !important; }
+    .hide-tablet { display: none !important; }
+}
+
+/* ===================================
+   TABLET DEVICES (768px - 991px)
+   Adjust hero height, card grid to 2 columns
+   =================================== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Ensure text is readable */
+    p, li, span, label, button, input, textarea, select {
+        font-size: 15px;
+    }
+
+    .hero-section {
+        min-height: 70vh;
+        padding: 60px 20px;
+    }
+
+    .hero-headline {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .hero-subheadline {
+        font-size: 17px;
+        margin-bottom: 40px;
+    }
+
+    .video-container {
+        margin-bottom: 40px;
+    }
+
+    .cta-button {
+        width: 100%;
+        max-width: 350px;
+        min-height: 44px;
+        font-size: 16px;
+        padding: 14px 32px;
+    }
+
+    /* Problem-Solution: 2 columns, stack on bottom */
+    .problem-solution-section {
+        padding: 60px 0;
+    }
+
+    .problem-solution-heading {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .col-md-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Benefits Section - responsive grid */
+    .benefits-section {
+        padding: 60px 0;
+    }
+
+    .benefits-heading {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .benefit-card {
+        padding: 32px 24px;
+        margin-bottom: 25px;
+    }
+
+    .benefit-icon {
+        font-size: 72px;
+    }
+
+    .benefit-title {
+        font-size: 20px;
+    }
+
+    /* Operations: 2 columns grid */
+    .bot-operations-section {
+        padding: 50px 0;
+    }
+
+    .operations-heading {
+        font-size: 30px;
+    }
+
+    .operation-card {
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+
+    .operation-card:hover {
+        transform: scale(1.02);
+    }
+
+    /* FAQ and Contact adjustments */
+    .faq-heading {
+        font-size: 30px;
+    }
+
+    .contact-heading {
+        font-size: 30px;
+    }
+
+    .contact-form {
+        padding: 32px;
+    }
+
+    .contact-form .form-control {
+        min-height: 42px;
+    }
+
+    .submit-button {
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    /* Tablet utilities */
+    .show-tablet { display: block !important; }
+    .hide-tablet { display: none !important; }
+    .show-mobile { display: none !important; }
+    .hide-mobile { display: block !important; }
+}
+
+/* ===================================
+   DESKTOP DEVICES (≥992px)
+   Ensure max-width containers don't stretch too wide
+   =================================== */
+@media (min-width: 992px) {
+    /* Constrain max widths for better readability on ultra-wide screens */
+    .container {
+        max-width: 1200px;
+    }
+
+    .video-container {
+        max-width: 800px;
+    }
+
+    .faq-container {
+        max-width: 900px;
+    }
+
+    .contact-form-wrapper {
+        max-width: 650px;
+    }
+
+    .hero-section {
+        min-height: 85vh;
+        padding: 80px 20px;
+    }
+
+    .hero-headline {
+        font-size: 52px;
+    }
+
+    .hero-subheadline {
+        font-size: 22px;
+        max-width: 750px;
+    }
+
+    .cta-button {
+        min-height: 44px;
+        min-width: 120px;
+        font-size: 18px;
+        padding: 18px 48px;
+    }
+
+    /* Problem-Solution 3 columns */
+    .col-lg-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+
+    .problem-solution-card {
+        margin-bottom: 30px;
+    }
+
+    /* Buttons should maintain minimum touch targets */
+    button, .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Accordion and form elements */
+    .accordion-faq .accordion-button {
+        min-height: 48px;
+        font-size: 1.05rem;
+    }
+
+    .contact-form .form-control {
+        min-height: 40px;
+        font-size: 16px;
+    }
+
+    .submit-button {
+        min-height: 50px;
+        font-size: 18px;
+    }
+
+    /* Desktop utilities */
+    .show-desktop { display: block !important; }
+    .hide-desktop { display: none !important; }
+    .show-mobile { display: none !important; }
+    .hide-mobile { display: block !important; }
+    .show-tablet { display: none !important; }
+    .hide-tablet { display: block !important; }
+}
+
+/* ===================================
+   ULTRA-WIDE SCREENS (≥1400px)
+   Additional spacing optimization
+   =================================== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+
+    section {
+        padding: 100px 0;
+    }
+
+    .hero-section {
+        min-height: 90vh;
+    }
+
+    .hero-headline {
+        font-size: 56px;
+    }
+}
+
+/* ===================================
+   RESPONSIVE VIDEO EMBED
+   Maintains 16:9 aspect ratio on all screens
+   Bootstrap's ratio utility handles this via ratio-16x9 class
+   =================================== */
+.ratio {
+    position: relative;
+    width: 100%;
+}
+
+.ratio-16x9 {
+    aspect-ratio: 16 / 9;
+}
+
+.ratio-16x9 > * {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.video-container .ratio-16x9 iframe {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+    .video-container .ratio-16x9 iframe {
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* ===================================
+   RESPONSIVE UTILITIES CLASSES
+   Use these for show/hide elements by breakpoint
+   =================================== */
+
+/* Visibility utilities */
+.d-mobile { display: none; }
+.d-tablet { display: none; }
+.d-desktop { display: block; }
+
+@media (max-width: 575.98px) {
+    .d-mobile { display: block; }
+    .d-tablet { display: none; }
+    .d-desktop { display: none; }
+    
+    .hidden-mobile { display: none !important; }
+    .visible-mobile { display: block !important; }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .d-mobile { display: none; }
+    .d-tablet { display: block; }
+    .d-desktop { display: none; }
+    
+    .hidden-tablet { display: none !important; }
+    .visible-tablet { display: block !important; }
+}
+
+@media (min-width: 992px) {
+    .d-mobile { display: none; }
+    .d-tablet { display: none; }
+    .d-desktop { display: block; }
+    
+    .hidden-desktop { display: none !important; }
+    .visible-desktop { display: block !important; }
+}
+
+/* ===================================
+   ACCESSIBILITY: FOCUS STATES
+   Enhanced keyboard navigation for all devices
+   =================================== */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Remove outline on mouse/touch, keep on keyboard */
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ===================================
+   TOUCH-FRIENDLY SPACING
+   Increased spacing on mobile for easier interaction
+   =================================== */
+@media (max-width: 767px) {
+    /* Increase gap between interactive elements */
+    .row {
+        gap: 16px;
+    }
+
+    .row.g-4 {
+        gap: 1.5rem;
+    }
+
+    /* Better spacing between form fields */
+    .mb-3 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* More breathing room around cards */
+    .card {
+        margin-bottom: 1rem;
+    }
+}
