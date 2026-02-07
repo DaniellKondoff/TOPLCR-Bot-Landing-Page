@@ -349,6 +349,95 @@
     </section>
 
     <!-- CONTACT FORM SECTION -->
+    <section id="contact-form" class="contact-section" aria-label="Contact form and call to action">
+        <div class="container">
+            <h2 class="contact-heading text-center">Ready to Save 2-3 Hours Every Day?</h2>
+            <p class="contact-subheading text-center">Join telecom professionals who are already working smarter</p>
+
+            <div class="contact-card mx-auto">
+                <!-- Form Messages (hidden by default) -->
+                <div id="formMessages" aria-live="polite">
+                    <!-- JS will inject success/error messages here -->
+                    <div id="formError" class="alert alert-danger d-none" role="alert">
+                        <i class="fas fa-exclamation-circle me-2" aria-hidden="true"></i>
+                        <span id="formErrorText">Please fix the errors below and try again.</span>
+                    </div>
+                    <div id="formSuccess" class="alert alert-success d-none" role="alert">
+                        <i class="fas fa-check-circle me-2" aria-hidden="true"></i>
+                        <span id="formSuccessText">Thank you! We'll be in touch within 24 hours.</span>
+                    </div>
+                </div>
+
+                <form id="contactForm" novalidate>
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Name <span class="required-star">*</span></label>
+                        <input type="text" class="form-control" id="userName" name="userName"
+                               placeholder="John Smith" required minlength="2"
+                               aria-describedby="userNameError">
+                        <div id="userNameError" class="invalid-feedback">
+                            <!-- JS validation message -->
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email <span class="required-star">*</span></label>
+                        <input type="email" class="form-control" id="userEmail" name="userEmail"
+                               placeholder="john@company.com" required
+                               pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                               aria-describedby="userEmailError">
+                        <div id="userEmailError" class="invalid-feedback">
+                            <!-- JS validation message -->
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="mb-3">
+                        <label for="userPhone" class="form-label">Phone <span class="required-star">*</span></label>
+                        <input type="tel" class="form-control" id="userPhone" name="userPhone"
+                               placeholder="+1 (555) 123-4567" required
+                               pattern="[0-9]{10,15}"
+                               aria-describedby="userPhoneError">
+                        <div id="userPhoneError" class="invalid-feedback">
+                            <!-- JS validation message -->
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="mb-3">
+                        <label for="userMessage" class="form-label">How can we help? (Optional)</label>
+                        <textarea class="form-control" id="userMessage" name="userMessage"
+                                  placeholder="Tell us about your telecom sales challenges..."
+                                  rows="4"></textarea>
+                    </div>
+
+                    <!-- Math CAPTCHA -->
+                    <div class="mb-3">
+                        <label for="captchaAnswer" class="form-label">Human verification: What is 5 + 3? <span class="required-star">*</span></label>
+                        <input type="text" class="form-control" id="captchaAnswer" name="captchaAnswer"
+                               placeholder="Enter answer" required
+                               aria-describedby="captchaError">
+                        <div id="captchaError" class="invalid-feedback">
+                            <!-- JS validation message -->
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitButton" class="btn btn-lg w-100 contact-submit-btn">
+                        Request FREE Credits Now
+                    </button>
+                </form>
+
+                <!-- Trust Indicators -->
+                <ul class="contact-trust-list text-center mt-4">
+                    <li><span class="contact-checkmark">&#10003;</span> No credit card required</li>
+                    <li><span class="contact-checkmark">&#10003;</span> 10-20 free operations included</li>
+                    <li><span class="contact-checkmark">&#10003;</span> Get activated within 24 hours</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
     <!-- FOOTER SECTION -->
 
