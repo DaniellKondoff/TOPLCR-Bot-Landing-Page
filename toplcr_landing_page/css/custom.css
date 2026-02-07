@@ -59,9 +59,150 @@ section {
     font-size: 1rem;
 }
 
-/* Hero Section */
+/* ===================================
+   HERO SECTION
+   =================================== */
+
+/* Hero Section Base */
 .hero-section {
-    background-color: var(--light-background);
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* Typography */
+.hero-headline {
+    font-size: 52px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.hero-subheadline {
+    font-size: 22px;
+    font-weight: 400;
+    color: #5a6c7d;
+    margin-bottom: 50px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Video Container */
+.video-container {
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-container iframe {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* CTA Button */
+.cta-button {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    padding: 18px 48px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    text-transform: none;
+    letter-spacing: 0.3px;
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 188, 156, 0.4);
+    color: #ffffff;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(26, 188, 156, 0.3);
+}
+
+/* Trust Badge */
+.trust-badge {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--secondary-color);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Responsive Design for Large Desktop */
+@media (max-width: 992px) {
+    .hero-section {
+        min-height: auto;
+        padding: 60px 20px;
+    }
+    
+    .hero-headline {
+        font-size: 40px;
+    }
+    
+    .hero-subheadline {
+        font-size: 18px;
+        margin-bottom: 40px;
+    }
+}
+
+/* Responsive Design for Tablet */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 50px 16px;
+    }
+    
+    .hero-headline {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+    
+    .hero-subheadline {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+        padding: 16px 32px;
+    }
+    
+    .video-container {
+        margin-bottom: 35px;
+    }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
+    .hero-headline {
+        font-size: 28px;
+    }
+    
+    .hero-subheadline {
+        font-size: 15px;
+    }
+    
+    .trust-badge {
+        font-size: 14px;
+    }
 }
 
 /* Problem-Solution Section */
