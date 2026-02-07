@@ -1360,171 +1360,204 @@ section {
    HOW IT WORKS SECTION
    =================================== */
 
-.bot-operations-section {
-    background-color: var(--primary-color);
-    padding: 60px 0;
+.how-it-works-section {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 100px 0 88px;
 }
 
-/* Operations Section Heading */
-.operations-heading {
+.how-it-works-header {
     text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--dark-text);
-    margin-bottom: 16px;
-    line-height: 1.3;
+    max-width: 620px;
+    margin: 0 auto 56px;
 }
 
-/* Operations Section Subheading */
-.operations-subheading {
-    text-align: center;
-    font-size: 18px;
-    color: #666666;
-    margin-bottom: 50px;
-    line-height: 1.6;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.how-it-works-eyebrow {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
 }
 
-/* Operation Card Styles */
+.how-it-works-heading {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.how-it-works-sub {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 1.125rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Grid: 1 / 2 / 3 columns */
+.how-it-works-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .how-it-works-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+}
+
+@media (min-width: 992px) {
+    .how-it-works-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+}
+
+/* Operation card */
 .operation-card {
-    background-color: #FFFFFF;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    overflow: hidden;
 }
 
 .operation-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 16px rgba(26, 188, 156, 0.15);
-    border-color: var(--secondary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    border-color: rgba(26, 188, 156, 0.3);
 }
 
-.operation-card .card-body {
-    padding: 0;
+.operation-card-inner {
+    padding: 28px 26px;
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
-/* Operation Number Badge */
-.operation-number {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 48px;
-    font-weight: 700;
+/* Step badge */
+.operation-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(26, 188, 156, 0.14) 0%, rgba(26, 188, 156, 0.08) 100%);
     color: var(--secondary-color);
-    opacity: 0.2;
-    line-height: 1;
-    z-index: 1;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
 }
 
-/* Operation Title */
 .operation-title {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--dark-text);
-    margin-top: 20px;
-    margin-bottom: 15px;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
     line-height: 1.3;
+    letter-spacing: -0.01em;
 }
 
-/* Operation Description */
 .operation-description {
-    font-size: 15px;
-    color: #666666;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.9375rem;
+    color: #475569;
     line-height: 1.6;
     margin: 0;
     flex-grow: 1;
 }
 
-/* Responsive Design - Tablet */
-@media (max-width: 991px) {
-    .bot-operations-section {
-        padding: 50px 0;
-    }
-    
-    .operations-heading {
-        font-size: 28px;
-        margin-bottom: 12px;
-    }
-    
-    .operations-subheading {
-        font-size: 16px;
-        margin-bottom: 40px;
+@media (prefers-reduced-motion: reduce) {
+    .operation-card:hover {
+        transform: none;
     }
 }
 
-/* Responsive Design - Mobile */
-@media (max-width: 767px) {
-    .bot-operations-section {
-        padding: 40px 0;
+/* Responsive: How it works */
+@media (max-width: 768px) {
+    .how-it-works-section {
+        padding: 64px 0 56px;
     }
     
-    .operations-heading {
-        font-size: 24px;
+    .how-it-works-header {
+        margin-bottom: 40px;
+    }
+    
+    .how-it-works-heading {
+        font-size: 1.625rem;
+    }
+    
+    .how-it-works-sub {
+        font-size: 1rem;
+    }
+    
+    .operation-card-inner {
+        padding: 24px 20px;
+    }
+    
+    .operation-step {
+        width: 36px;
+        height: 36px;
+        font-size: 0.8125rem;
+        margin-bottom: 14px;
+    }
+    
+    .operation-title {
+        font-size: 1.0625rem;
         margin-bottom: 10px;
     }
     
-    .operations-subheading {
-        font-size: 15px;
-        margin-bottom: 30px;
-    }
-    
-    .operation-card {
-        padding: 24px;
-        margin-bottom: 20px;
-    }
-    
-    .operation-card:hover {
-        transform: scale(1.02);
-    }
-    
-    .operation-number {
-        font-size: 40px;
-        top: 16px;
-        left: 16px;
-    }
-    
-    .operation-title {
-        font-size: 18px;
-        margin-top: 16px;
-        margin-bottom: 12px;
-    }
-    
     .operation-description {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 }
 
-/* Responsive Design - Small Mobile */
 @media (max-width: 480px) {
-    .operations-heading {
-        font-size: 20px;
+    .how-it-works-section {
+        padding: 48px 0 44px;
     }
     
-    .operations-subheading {
-        font-size: 14px;
+    .how-it-works-header {
+        margin-bottom: 32px;
     }
     
-    .operation-card {
-        padding: 20px;
+    .how-it-works-heading {
+        font-size: 1.5rem;
     }
     
-    .operation-number {
-        font-size: 36px;
+    .operation-card-inner {
+        padding: 20px 18px;
+    }
+    
+    .operation-step {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
     }
     
     .operation-title {
-        font-size: 16px;
+        font-size: 1rem;
     }
+}
+
+/* Legacy: keep .bot-operations-section for any external refs */
+.bot-operations-section {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 100px 0 88px;
 }
 
 /* ===================================
@@ -1834,41 +1867,43 @@ section {
         margin-bottom: 10px;
     }
 
-    /* ===== OPERATIONS SECTION ===== */
-    .bot-operations-section {
-        padding: 40px 0;
+    /* ===== HOW IT WORKS / OPERATIONS SECTION ===== */
+    .how-it-works-section {
+        padding: 48px 0 40px;
     }
 
-    .operations-heading {
-        font-size: 20px;
-        margin-bottom: 8px;
+    .how-it-works-header {
+        margin-bottom: 32px;
     }
 
-    .operations-subheading {
-        font-size: 14px;
-        margin-bottom: 25px;
-        max-width: 100%;
+    .how-it-works-heading {
+        font-size: 1.375rem;
     }
 
-    .operation-card {
-        padding: 16px;
-        margin-bottom: 16px;
+    .how-it-works-sub {
+        font-size: 0.9375rem;
     }
 
-    .operation-number {
-        font-size: 32px;
-        top: 12px;
-        left: 12px;
+    .how-it-works-grid {
+        gap: 20px;
+    }
+
+    .operation-card-inner {
+        padding: 20px 16px;
+    }
+
+    .operation-step {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
     }
 
     .operation-title {
-        font-size: 16px;
-        margin-top: 12px;
-        margin-bottom: 10px;
+        font-size: 1rem;
     }
 
     .operation-description {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 
     /* ===== FAQ SECTION ===== */
@@ -2023,8 +2058,8 @@ section {
         font-size: 1.125rem;
     }
 
-    .operations-heading {
-        font-size: 24px;
+    .how-it-works-heading {
+        font-size: 1.5rem;
     }
 
     .faq-heading {
@@ -2149,22 +2184,21 @@ section {
         font-size: 1.125rem;
     }
 
-    /* Operations: 2 columns grid */
-    .bot-operations-section {
-        padding: 50px 0;
+    /* How it works: 2 columns */
+    .how-it-works-section {
+        padding: 72px 0 64px;
     }
 
-    .operations-heading {
-        font-size: 30px;
+    .how-it-works-header {
+        margin-bottom: 48px;
     }
 
-    .operation-card {
-        padding: 25px;
-        margin-bottom: 20px;
+    .how-it-works-heading {
+        font-size: 2rem;
     }
 
-    .operation-card:hover {
-        transform: scale(1.02);
+    .operation-card-inner {
+        padding: 26px 22px;
     }
 
     /* FAQ and Contact adjustments */
