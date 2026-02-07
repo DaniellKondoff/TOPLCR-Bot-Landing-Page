@@ -3,6 +3,13 @@
  * Initialize landing page functionality
  */
 
+// Track form submission timing for bot detection
+const formTimingData = {
+    formLoadTime: Date.now(),
+    lastSubmissionTime: 0,
+    currentCaptcha: null
+};
+
 // Wait for DOM to be fully loaded before executing scripts
 document.addEventListener('DOMContentLoaded', function() {
     console.log('TOPLCR Landing Page Initialized');
@@ -16,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize form validation
     initializeContactFormValidation();
+    
+    // Generate initial CAPTCHA question
+    generateDynamicCaptcha();
     
     // Smooth scroll functionality will go here
     // TODO: Add smooth scroll behavior for anchor links
@@ -77,6 +87,21 @@ function initializeContactFormValidation() {
             formMessages.innerHTML = '';
         }
         
+        // Check honeypot - if filled, silently reject (bot detected)
+        if (!validateHoneypot()) {
+            console.warn('Honeypot field detected - submission blocked');
+            showSuccessMessage(formMessages, 'Thank you! Your request has been received. We\'ll contact you within 24 hours.');
+            contactForm.reset();
+            generateDynamicCaptcha();
+            return;
+        }
+        
+        // Check submission timing - reject if too fast
+        if (!validateSubmissionTiming()) {
+            showErrorMessage(formMessages, 'Please wait a moment before submitting again.');
+            return;
+        }
+        
         // Validate all fields
         const isNameValid = validateNameField();
         const isEmailValid = validateEmailField();
@@ -92,8 +117,14 @@ function initializeContactFormValidation() {
             // Show success message
             showSuccessMessage(formMessages, 'Thank you! Your request has been received. We\'ll contact you within 24 hours.');
             
+            // Update last submission time
+            formTimingData.lastSubmissionTime = Date.now();
+            
             // Reset form
             contactForm.reset();
+            
+            // Generate new CAPTCHA for next submission
+            generateDynamicCaptcha();
             
             // Remove is-valid classes
             [nameInput, emailInput, phoneInput, messageInput, captchaInput].forEach(input => {
@@ -197,22 +228,121 @@ function validatePhoneField() {
 }
 
 /**
+ * Generate a new dynamic CAPTCHA question
+ * Creates random math problems with different operations and numbers
+ */
+function generateDynamicCaptcha() {
+    const operations = [
+        { symbol: '+', name: 'addition' },
+        { symbol: '-', name: 'subtraction' },
+        { symbol: '×', name: 'multiplication' }
+    ];
+    
+    // Select random operation
+    const operation = operations[Math.floor(Math.random() * operations.length)];
+    
+    // Generate random numbers based on operation
+    let num1, num2;
+    if (operation.name === 'addition') {
+        num1 = Math.floor(Math.random() * 50) + 1;  // 1-50
+        num2 = Math.floor(Math.random() * 50) + 1;  // 1-50
+    } else if (operation.name === 'subtraction') {
+        num1 = Math.floor(Math.random() * 50) + 10; // 10-59
+        num2 = Math.floor(Math.random() * num1);    // 0 to num1-1 (ensures positive result)
+    } else { // multiplication
+        num1 = Math.floor(Math.random() * 12) + 1;  // 1-12
+        num2 = Math.floor(Math.random() * 12) + 1;  // 1-12
+    }
+    
+    // Calculate correct answer
+    let correctAnswer;
+    if (operation.name === 'addition') {
+        correctAnswer = num1 + num2;
+    } else if (operation.name === 'subtraction') {
+        correctAnswer = num1 - num2;
+    } else {
+        correctAnswer = num1 * num2;
+    }
+    
+    // Store current CAPTCHA data
+    formTimingData.currentCaptcha = {
+        question: `${num1} ${operation.symbol} ${num2}`,
+        answer: correctAnswer.toString()
+    };
+    
+    // Update the question in the UI
+    const questionElement = document.getElementById('captchaQuestion');
+    if (questionElement) {
+        questionElement.textContent = `What is ${formTimingData.currentCaptcha.question}?`;
+    }
+    
+    // Clear the input field
+    const captchaInput = document.getElementById('captchaAnswer');
+    if (captchaInput) {
+        captchaInput.value = '';
+        captchaInput.classList.remove('is-valid', 'is-invalid');
+    }
+    
+    console.log('New CAPTCHA generated');
+}
+
+/**
+ * Validate Honeypot Field
+ * If the hidden field is filled, it's likely a bot
+ * @returns {boolean} True if honeypot is empty (human), false if filled (bot)
+ */
+function validateHoneypot() {
+    const honeypotField = document.getElementById('websiteUrl');
+    if (!honeypotField) return true;
+    
+    // If honeypot field has a value, it's a bot
+    return honeypotField.value.trim() === '';
+}
+
+/**
+ * Validate Submission Timing
+ * Rejects submissions that happen too quickly (likely bot)
+ * @returns {boolean} True if timing is normal, false if too fast
+ */
+function validateSubmissionTiming() {
+    const currentTime = Date.now();
+    const timeSinceLastSubmission = currentTime - formTimingData.lastSubmissionTime;
+    const timeSinceFormLoad = currentTime - formTimingData.formLoadTime;
+    
+    // Reject if form was filled out in less than 2 seconds (too fast to be human)
+    if (timeSinceFormLoad < 2000) {
+        console.warn('Form submission too fast - likely bot');
+        return false;
+    }
+    
+    // Reject if resubmitting within 3 seconds (spam prevention)
+    if (formTimingData.lastSubmissionTime > 0 && timeSinceLastSubmission < 3000) {
+        console.warn('Rapid resubmission detected - likely bot');
+        return false;
+    }
+    
+    return true;
+}
+
+/**
  * Validate CAPTCHA Field
- * Simple math verification: 5 + 3 = 8
+ * Compares user input against dynamically generated question
  * @returns {boolean} True if valid, false otherwise
  */
 function validateCaptchaField() {
     const captchaInput = document.getElementById('captchaAnswer');
     const errorElement = document.getElementById('captchaAnswerError');
-    const correctAnswer = '8';
     
     if (!captchaInput.value.trim()) {
         showFieldError(captchaInput, errorElement, 'Please answer the verification question');
         return false;
     }
     
+    // Compare against current CAPTCHA answer
+    const correctAnswer = formTimingData.currentCaptcha ? formTimingData.currentCaptcha.answer : '8';
     if (captchaInput.value.trim() !== correctAnswer) {
-        showFieldError(captchaInput, errorElement, 'Incorrect answer. What is 5 + 3?');
+        const question = formTimingData.currentCaptcha ? formTimingData.currentCaptcha.question : '5 + 3';
+        showFieldError(captchaInput, errorElement, `Incorrect answer. What is ${question}?`);
         return false;
     }
     

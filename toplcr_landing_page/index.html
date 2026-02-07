@@ -411,9 +411,15 @@
                         <small class="form-error-text" id="userMessageError"></small>
                     </div>
 
-                    <!-- Math CAPTCHA Field -->
+                    <!-- Honeypot Field (Hidden) - Catches Bots -->
+                    <div class="mb-3" style="position: absolute; left: -9999px;">
+                        <label for="websiteUrl">Website</label>
+                        <input type="text" id="websiteUrl" name="websiteUrl" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <!-- Dynamic Math CAPTCHA Field -->
                     <div class="mb-3">
-                        <label for="captchaAnswer" class="form-label">Human verification: What is 5 + 3?</label>
+                        <label for="captchaAnswer" class="form-label">Human verification: <span id="captchaQuestion">What is 5 + 3?</span></label>
                         <input 
                             type="text" 
                             class="form-control" 
@@ -423,6 +429,7 @@
                             required
                             aria-label="CAPTCHA Answer"
                             aria-required="true"
+                            autocomplete="off"
                         >
                         <small class="form-error-text" id="captchaAnswerError"></small>
                     </div>
