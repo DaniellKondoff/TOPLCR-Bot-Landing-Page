@@ -397,7 +397,7 @@
                         <label for="userPhone" class="form-label">Phone <span class="required-star">*</span></label>
                         <input type="tel" class="form-control" id="userPhone" name="userPhone"
                                placeholder="+1 (555) 123-4567" required
-                               pattern="[0-9]{10,15}"
+                               pattern="[0-9]{7,15}"
                                aria-describedby="userPhoneError">
                         <div id="userPhoneError" class="invalid-feedback">
                             <!-- JS validation message -->
@@ -414,7 +414,7 @@
 
                     <!-- Math CAPTCHA -->
                     <div class="mb-3">
-                        <label for="captchaAnswer" class="form-label">Human verification: What is 5 + 3? <span class="required-star">*</span></label>
+                        <label for="captchaAnswer" class="form-label">Human verification: <span id="captchaQuestion">What is 5 + 3?</span> <span class="required-star">*</span></label>
                         <input type="text" class="form-control" id="captchaAnswer" name="captchaAnswer"
                                placeholder="Enter answer" required
                                aria-describedby="captchaError">
@@ -422,6 +422,30 @@
                             <!-- JS validation message -->
                         </div>
                     </div>
+
+                    <!-- Confirmation Checkbox (anti-bot + compliance) -->
+                    <div class="mb-3">
+                        <div class="form-check consent-check">
+                            <input class="form-check-input" type="checkbox" id="confirmHuman" name="confirmHuman"
+                                   aria-describedby="confirmHumanError">
+                            <label class="form-check-label" for="confirmHuman">
+                                I confirm I am a real person and agree to be contacted
+                                <span class="required-star">*</span>
+                            </label>
+                        </div>
+                        <div id="confirmHumanError" class="invalid-feedback">
+                            <!-- JS validation message -->
+                        </div>
+                    </div>
+
+                    <!-- Honeypot — hidden from real users, bots will fill it -->
+                    <div class="form-field-hp" aria-hidden="true" tabindex="-1">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <!-- Timestamp — JS sets value on page load -->
+                    <input type="hidden" id="formTimestamp" name="formTimestamp" value="">
 
                     <!-- Submit Button -->
                     <button type="submit" id="submitButton" class="btn btn-lg w-100 contact-submit-btn">
