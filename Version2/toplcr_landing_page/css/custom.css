@@ -89,6 +89,26 @@ section {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Ensure video maintains 16:9 aspect ratio on all screens */
+.ratio {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.ratio iframe,
+.ratio video,
+.ratio embed,
+.ratio object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: inherit;
+}
+
 .cta-button {
     background-color: var(--color-accent);
     color: #ffffff;
@@ -1103,6 +1123,48 @@ html {
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
+
+    /* --- Video responsive enhancement --- */
+    .video-container {
+        max-width: 100% !important;
+        margin: 20px auto !important;
+    }
+
+    .ratio {
+        width: 100% !important;
+        aspect-ratio: 16 / 9;
+    }
+
+    /* --- Link touch targets: Ensure all interactive elements are easily tappable --- */
+    a {
+        min-height: 44px;
+    }
+
+    /* --- Reduce gap between form groups on mobile --- */
+    .mb-3 {
+        margin-bottom: 16px !important;
+    }
+
+    /* --- Card margins for better mobile spacing --- */
+    .row > [class*="col-"] {
+        margin-bottom: 16px !important;
+    }
+
+    /* --- Hero CTA button: Full width on mobile --- */
+    .hero-section .cta-button {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* --- Enhanced tap targets for FAQ --- */
+    .accordion-item {
+        margin-bottom: 0 !important;
+    }
+
+    .accordion-button {
+        text-align: left;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -1151,9 +1213,10 @@ html {
         padding: 60px 0 !important;
     }
 
-    /* --- Cards: 2-column layout on tablet --- */
+    /* --- Cards: Ensure proper spacing on tablet --- */
     .benefit-card,
-    .operation-card {
+    .operation-card,
+    .ps-card {
         margin-bottom: 24px;
     }
 
@@ -1162,13 +1225,33 @@ html {
         max-width: 500px !important;
     }
 
+    /* --- Form inputs: Proper sizing on tablet --- */
+    .form-control,
+    .form-select {
+        font-size: 16px !important;
+        height: 44px !important;
+        padding: 10px 14px !important;
+    }
+
+    textarea.form-control {
+        min-height: 110px !important;
+    }
+
     /* --- Buttons: Adequate size --- */
     .btn,
     .cta-button,
-    .contact-submit-btn {
-        min-height: 48px !important;
-        padding: 14px 32px !important;
-        font-size: 17px !important;
+    .contact-submit-btn,
+    .accordion-button {
+        min-height: 44px !important;
+        padding: 12px 28px !important;
+        font-size: 16px !important;
+    }
+
+    /* --- Checkbox sizing --- */
+    .form-check-input {
+        width: 22px !important;
+        height: 22px !important;
+        min-width: 22px !important;
     }
 }
 
@@ -1217,6 +1300,26 @@ html {
 
     p {
         font-size: 17px !important;
+    }
+
+    /* --- Video: Proper sizing on desktop --- */
+    .video-container {
+        max-width: 700px;
+        margin: 0 auto 40px;
+    }
+
+    /* --- Form: Centered with max-width --- */
+    .contact-card {
+        max-width: 600px;
+    }
+
+    /* --- Button sizing for desktop --- */
+    .btn,
+    .cta-button,
+    .contact-submit-btn {
+        min-height: 44px;
+        padding: 14px 36px;
+        font-size: 18px;
     }
 }
 
@@ -1283,6 +1386,47 @@ html {
 }
 
 /* --------------------------------------------------------------------------
+   RESPONSIVE UTILITY CLASSES
+   -------------------------------------------------------------------------- */
+
+/* Show only on mobile */
+.show-mobile {
+    display: none !important;
+}
+
+@media (max-width: 575.98px) {
+    .show-mobile {
+        display: block !important;
+    }
+    
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Show only on tablet */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .show-tablet {
+        display: block !important;
+    }
+    
+    .hide-tablet {
+        display: none !important;
+    }
+}
+
+/* Show only on desktop */
+@media (min-width: 992px) {
+    .show-desktop {
+        display: block !important;
+    }
+    
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
    ACCESSIBILITY IMPROVEMENTS - Focus States for Keyboard Navigation
    -------------------------------------------------------------------------- */
 
@@ -1303,57 +1447,75 @@ select:focus {
 /* --- CTA Button focus state --- */
 .cta-button:focus {
     outline: 3px solid var(--color-secondary) !important;
-    outline-offset: 2px !important;
-    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3), 0 4px 15px rgba(255, 107, 53, 0.3);
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3), 0 4px 15px rgba(255, 107, 53, 0.3) !important;
 }
 
 .cta-button:focus:hover {
-    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3), 0 6px 20px rgba(26, 188, 156, 0.4);
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3), 0 6px 20px rgba(26, 188, 156, 0.4) !important;
+}
+
+.cta-button:active:focus {
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.2) !important;
+}
+
+/* --- Submit button focus state --- */
+.contact-submit-btn:focus,
+.contact-submit-btn:focus-visible {
+    outline: 3px solid var(--color-secondary) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.25) !important;
+}
+
+.contact-submit-btn:focus:hover {
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.25) !important;
 }
 
 /* --- Form controls focus state --- */
-.contact-section .form-control:focus {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.25), 0 0 0 4px rgba(26, 188, 156, 0.1);
+.contact-section .form-control:focus,
+.contact-section .form-control:focus-visible {
+    border-color: var(--color-secondary) !important;
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.25), 0 0 0 4px rgba(26, 188, 156, 0.1) !important;
 }
 
-.consent-check .form-check-input:focus {
-    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.25), 0 0 0 4px rgba(26, 188, 156, 0.1);
-    border-color: var(--color-secondary);
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: 2px !important;
+}
+
+.consent-check .form-check-input:focus,
+.consent-check .form-check-input:focus-visible {
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.25), 0 0 0 4px rgba(26, 188, 156, 0.1) !important;
+    border-color: var(--color-secondary) !important;
 }
 
 /* --- FAQ accordion buttons focus --- */
-.faq-button:focus {
-    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.25);
-    outline: none;
+.faq-button:focus,
+.faq-button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.25) !important;
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: 1px !important;
 }
 
 /* --- Footer links focus state --- */
-.footer-link:focus {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
+.footer-link:focus,
+.footer-link:focus-visible {
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: 2px !important;
+    text-decoration: underline !important;
 }
 
 /* --- Card hover and focus states --- */
 .ps-card:focus-within {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.1) !important;
     transform: translateY(-2px);
 }
 
 .operation-card:focus-within {
-    box-shadow: 0 8px 16px rgba(26, 188, 156, 0.15);
-    border-color: var(--color-secondary);
-}
-
-/* --- Button focus states --- */
-.contact-submit-btn:focus {
-    outline: 3px solid var(--color-secondary) !important;
-    outline-offset: 2px !important;
-    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.25);
-}
-
-.contact-submit-btn:focus:hover {
-    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.25);
+    box-shadow: 0 8px 16px rgba(26, 188, 156, 0.15) !important;
+    border-color: var(--color-secondary) !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1389,13 +1551,32 @@ select:focus {
 }
 
 /* --------------------------------------------------------------------------
-   ACCESSIBILITY IMPROVEMENTS - Generic Styles
+   COMPREHENSIVE TOUCH TARGET OPTIMIZATION
+   Ensure all interactive elements meet WCAG AAA 44x44px minimum
    -------------------------------------------------------------------------- */
 
-/* --- Link Targets: Minimum touch target size --- */
-a {
-    min-height: 24px;
-    display: inline-block;
+@media (max-width: 991.98px) {
+    /* Ensure form elements have proper touch sizing */
+    .btn,
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+
+    /* Form input touch optimization */
+    .form-check-input {
+        cursor: pointer;
+    }
+
+    .form-check-label {
+        cursor: pointer;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
 }
 
 /* --- Skip to content (for future implementation) --- */
@@ -1422,8 +1603,59 @@ table {
 }
 
 /* --------------------------------------------------------------------------
-   LANDSCAPE ORIENTATION FIXES (Mobile Landscape)
+   RESPONSIVE VIEWPORT-SPECIFIC SPACING & ENHANCEMENTS
    -------------------------------------------------------------------------- */
+
+/* Mobile-first spacing adjustments */
+@media (max-width: 575.98px) {
+    /* Padding adjustments for sections */
+    .ps-card .card-body {
+        padding: 24px 16px !important;
+    }
+
+    .benefit-card {
+        padding: 28px 16px !important;
+    }
+
+    .operation-card {
+        padding: 20px 16px !important;
+    }
+
+    /* Hero CTA spacing */
+    .hero-section .cta-button {
+        margin-top: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* FAQ item styling */
+    .faq-item:not(:last-child) {
+        margin-bottom: 8px !important;
+    }
+}
+
+/* Tablet spacing adjustments */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .g-4 > * {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   FOCUS-VISIBLE POLYFILL SUPPORT
+   For better browser compatibility with focus states
+   -------------------------------------------------------------------------- */
+
+/* Ensure focus states work with :focus-visible */
+:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+/* Ensure keyboard focus is always visible */
+:focus-visible {
+    outline: 3px solid var(--color-secondary) !important;
+    outline-offset: 2px !important;
+}
 @media (max-width: 991.98px) and (orientation: landscape) {
     .hero-section {
         min-height: 100vh !important;
