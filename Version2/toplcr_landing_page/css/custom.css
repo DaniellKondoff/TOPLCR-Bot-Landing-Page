@@ -522,6 +522,119 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   FAQ Section
+   -------------------------------------------------------------------------- */
+.faq-section {
+    background: #ffffff;
+    padding: 80px 0;
+}
+
+.faq-heading {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.faq-subheading {
+    text-align: center;
+    color: #666;
+    font-size: 17px;
+    margin-bottom: 3rem;
+}
+
+/* --- Accordion Items --- */
+.faq-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+/* --- Accordion Button (question) --- */
+.faq-button {
+    background: #ffffff;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 1.25rem;
+    border: none;
+    box-shadow: none;
+}
+
+.faq-button:focus {
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.25);
+    z-index: 1;
+}
+
+/* Collapsed state — override Bootstrap's default icon */
+.faq-button::after {
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333333' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Expanded state */
+.faq-button:not(.collapsed) {
+    background-color: #1ABC9C;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.faq-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    transform: rotate(-180deg);
+}
+
+/* --- Accordion Body (answer) --- */
+.faq-body {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* --- FAQ Responsive --- */
+@media (max-width: 991.98px) {
+    .faq-heading {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .faq-section {
+        padding: 60px 0;
+    }
+
+    .faq-heading {
+        font-size: 28px;
+    }
+
+    .faq-subheading {
+        font-size: 16px;
+        margin-bottom: 2rem;
+    }
+
+    .faq-button {
+        font-size: 1rem;
+        padding: 1rem;
+        min-height: 44px;
+    }
+
+    .faq-body {
+        padding: 1.25rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
    Test Section (verification — remove after Phase 1)
    -------------------------------------------------------------------------- */
 .test-section {
