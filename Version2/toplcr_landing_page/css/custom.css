@@ -434,6 +434,94 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Bot Operations / How It Works Section
+   -------------------------------------------------------------------------- */
+.bot-operations-section {
+    background-color: #ffffff;
+    padding: 60px 0;
+}
+
+.bot-operations-heading {
+    font-size: 38px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 16px;
+}
+
+.bot-operations-subheading {
+    font-size: 17px;
+    color: #6c757d;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.operation-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+}
+
+.operation-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(26, 188, 156, 0.15);
+    border-color: #1ABC9C;
+}
+
+.operation-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #1ABC9C;
+    opacity: 0.2;
+    line-height: 1;
+    display: block;
+}
+
+.operation-card h4 {
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.operation-card p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* --- Bot Operations Responsive --- */
+@media (max-width: 991.98px) {
+    .bot-operations-heading {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .bot-operations-section {
+        padding: 40px 0;
+    }
+
+    .bot-operations-heading {
+        font-size: 28px;
+    }
+
+    .bot-operations-subheading {
+        font-size: 16px;
+    }
+
+    .operation-card {
+        padding: 24px;
+    }
+}
+
+/* --------------------------------------------------------------------------
    Test Section (verification — remove after Phase 1)
    -------------------------------------------------------------------------- */
 .test-section {
