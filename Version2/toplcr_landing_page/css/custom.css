@@ -814,6 +814,33 @@ section {
     display: block;
 }
 
+/* --- Form Success/Error Messages --- */
+.form-success-message,
+.form-error-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-success-message.show,
+.form-error-message.show {
+    opacity: 1;
+}
+
+.form-success-message {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.form-error-message {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
 /* --- Consent Checkbox --- */
 .consent-check .form-check-input {
     width: 18px;

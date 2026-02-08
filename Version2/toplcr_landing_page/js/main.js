@@ -38,37 +38,57 @@ const initSmoothScroll = () => {
    2. DYNAMIC MATH CAPTCHA
    -------------------------------------------------------------------------- */
 
-let captchaExpectedAnswer = "";
+// Track form submission timing for bot detection
+const formTimingData = {
+    formLoadTime: Date.now(),
+    lastSubmissionTime: 0,
+    currentCaptcha: null
+};
 
 const generateCaptcha = () => {
     const operators = [
-        { symbol: "+", fn: (a, b) => a + b },
-        { symbol: "−", fn: (a, b) => a - b },
-        { symbol: "×", fn: (a, b) => a * b },
+        { symbol: "+", name: "addition" },
+        { symbol: "−", name: "subtraction" },
+        { symbol: "×", name: "multiplication" },
     ];
 
     const op = operators[Math.floor(Math.random() * operators.length)];
 
     let a, b;
-    if (op.symbol === "×") {
-        // Keep multiplication simple: 2-9
-        a = Math.floor(Math.random() * 8) + 2;
-        b = Math.floor(Math.random() * 8) + 2;
+    if (op.name === "addition") {
+        // Addition: 1-50 for both numbers
+        a = Math.floor(Math.random() * 50) + 1;
+        b = Math.floor(Math.random() * 50) + 1;
+    } else if (op.name === "subtraction") {
+        // Subtraction: num1 (10-59), num2 (0 to num1-1) ensures positive result
+        a = Math.floor(Math.random() * 50) + 10;
+        b = Math.floor(Math.random() * a);
+    } else { // multiplication
+        // Multiplication: 1-12 for both numbers
+        a = Math.floor(Math.random() * 12) + 1;
+        b = Math.floor(Math.random() * 12) + 1;
+    }
+
+    // Calculate correct answer
+    let correctAnswer;
+    if (op.name === "addition") {
+        correctAnswer = a + b;
+    } else if (op.name === "subtraction") {
+        correctAnswer = a - b;
     } else {
-        a = Math.floor(Math.random() * 9) + 1;
-        b = Math.floor(Math.random() * 9) + 1;
+        correctAnswer = a * b;
     }
 
-    // For subtraction, ensure a >= b so the answer is never negative
-    if (op.symbol === "−" && a < b) {
-        [a, b] = [b, a];
-    }
+    // Store current CAPTCHA data in formTimingData
+    formTimingData.currentCaptcha = {
+        question: `${a} ${op.symbol} ${b}`,
+        answer: correctAnswer.toString()
+    };
 
-    captchaExpectedAnswer = String(op.fn(a, b));
-
+    // Update the question in the UI
     const questionEl = document.getElementById("captchaQuestion");
     if (questionEl) {
-        questionEl.textContent = `What is ${a} ${op.symbol} ${b}?`;
+        questionEl.textContent = `What is ${formTimingData.currentCaptcha.question}?`;
     }
 
     // Clear the input when generating a new question
@@ -77,6 +97,8 @@ const generateCaptcha = () => {
         input.value = "";
         clearError(input);
     }
+
+    console.log('New CAPTCHA generated');
 };
 
 /* --------------------------------------------------------------------------
@@ -143,47 +165,47 @@ const initContactForm = () => {
     if (!form) return;
 
     const submitBtn = document.getElementById("submitButton");
-    const phoneInput = document.getElementById("userPhone");
 
     // Generate initial CAPTCHA question
     generateCaptcha();
 
-    // Set timestamp for bot detection
-    const timestampInput = document.getElementById("formTimestamp");
-    if (timestampInput) {
-        timestampInput.value = Date.now();
+    // --- Real-time: clear errors on input, validate on blur ---
+    const nameInput = document.getElementById('userName');
+    const emailInput = document.getElementById('userEmail');
+    const phoneInput = document.getElementById('userPhone');
+    const captchaInput = document.getElementById('captchaAnswer');
+    const checkboxInput = document.getElementById('confirmHuman');
+
+    // Name field validation
+    if (nameInput) {
+        nameInput.addEventListener('blur', () => validateNameField());
+        nameInput.addEventListener('input', () => clearFieldError(nameInput, 'userNameError'));
     }
 
-    // Track which fields the user has interacted with
-    const touchedFields = new Set();
+    // Email field validation
+    if (emailInput) {
+        emailInput.addEventListener('blur', () => validateEmailField());
+        emailInput.addEventListener('input', () => clearFieldError(emailInput, 'userEmailError'));
+    }
 
-    // --- Real-time: clear errors on input, validate on blur ---
-    Object.keys(VALIDATION_RULES).forEach((fieldId) => {
-        const field = document.getElementById(fieldId);
-        if (!field) return;
+    // Phone field validation
+    if (phoneInput) {
+        phoneInput.addEventListener('blur', () => validatePhoneField());
+        phoneInput.addEventListener('input', () => clearFieldError(phoneInput, 'userPhoneError'));
+    }
 
-        const rules = VALIDATION_RULES[fieldId];
+    // CAPTCHA field validation
+    if (captchaInput) {
+        captchaInput.addEventListener('blur', () => validateCaptchaField());
+        captchaInput.addEventListener('input', () => clearFieldError(captchaInput, 'captchaError'));
+    }
 
-        if (rules.isCheckbox) {
-            // Checkboxes: validate immediately on change
-            field.addEventListener("change", () => {
-                touchedFields.add(fieldId);
-                validateField(field);
-            });
-        } else {
-            // Text inputs: clear error on input, validate on blur
-            field.addEventListener("input", () => {
-                touchedFields.add(fieldId);
-                clearError(field);
-            });
-
-            field.addEventListener("blur", () => {
-                if (touchedFields.has(fieldId)) {
-                    validateField(field);
-                }
-            });
-        }
-    });
+    // Checkbox validation (keep existing logic)
+    if (checkboxInput) {
+        checkboxInput.addEventListener('change', () => {
+            validateField(checkboxInput);
+        });
+    }
 
     // --- Phone formatting as user types ---
     if (phoneInput) {
@@ -198,24 +220,32 @@ const initContactForm = () => {
         hideFormMessages();
 
         // --- Bot detection: honeypot must be empty ---
-        const honeypot = document.getElementById("website");
+        const honeypot = document.getElementById("websiteUrl");
         if (honeypot && honeypot.value !== "") {
             // Silently fake-succeed so the bot thinks it worked
+            console.warn('Honeypot field detected - submission blocked');
             silentFakeSuccess(submitBtn);
             return;
         }
 
-        // --- Bot detection: form submitted too fast (< 3 seconds) ---
-        if (timestampInput) {
-            const elapsed = Date.now() - parseInt(timestampInput.value, 10);
-            if (elapsed < 3000) {
+        // --- Bot detection: Check submission timing ---
+        // Check 1: Form submitted too fast since load (< 2 seconds)
+        const timeSinceLoad = Date.now() - formTimingData.formLoadTime;
+        if (timeSinceLoad < 2000) {
+            console.warn('Form submission too fast - likely bot');
+            silentFakeSuccess(submitBtn);
+            return;
+        }
+
+        // Check 2: Rapid resubmission (< 3 seconds since last submission)
+        if (formTimingData.lastSubmissionTime > 0) {
+            const timeSinceLastSubmit = Date.now() - formTimingData.lastSubmissionTime;
+            if (timeSinceLastSubmit < 3000) {
+                console.warn('Rapid resubmission detected - likely bot');
                 silentFakeSuccess(submitBtn);
                 return;
             }
         }
-
-        // Mark all required fields as touched
-        Object.keys(VALIDATION_RULES).forEach((id) => touchedFields.add(id));
 
         const isValid = validateForm();
 
@@ -241,8 +271,16 @@ const initContactForm = () => {
         setTimeout(() => {
             setSubmitLoading(submitBtn, false);
             showSuccessMessage("Thank you! We'll contact you within 24 hours.");
+
+            // Update last submission time for bot detection
+            formTimingData.lastSubmissionTime = Date.now();
+
+            // Reset form and validation
             form.reset();
             clearAllValidation();
+
+            // Generate new CAPTCHA for next submission
+            generateCaptcha();
 
             // Scroll success message into view
             const msgEl = document.getElementById("formMessages");
@@ -266,7 +304,119 @@ const silentFakeSuccess = (submitBtn) => {
 };
 
 /* --------------------------------------------------------------------------
-   6. VALIDATE A SINGLE FIELD
+   6. INDIVIDUAL FIELD VALIDATION FUNCTIONS
+   -------------------------------------------------------------------------- */
+
+/**
+ * Validate Name Field
+ * @returns {boolean} True if valid, false otherwise
+ */
+const validateNameField = () => {
+    const nameInput = document.getElementById('userName');
+    const errorElement = document.getElementById('userNameError');
+
+    if (!nameInput.value.trim()) {
+        showFieldError(nameInput, errorElement, 'Full name is required');
+        return false;
+    }
+
+    if (nameInput.value.trim().length < 2) {
+        showFieldError(nameInput, errorElement, 'Name must be at least 2 characters long');
+        return false;
+    }
+
+    // Check for valid name pattern (letters, spaces, hyphens, apostrophes)
+    const namePattern = /^[a-zA-Z\s'-]+$/;
+    if (!namePattern.test(nameInput.value.trim())) {
+        showFieldError(nameInput, errorElement, 'Name can only contain letters, spaces, hyphens, and apostrophes');
+        return false;
+    }
+
+    clearFieldError(nameInput, 'userNameError');
+    nameInput.classList.add('is-valid');
+    return true;
+};
+
+/**
+ * Validate Email Field
+ * @returns {boolean} True if valid, false otherwise
+ */
+const validateEmailField = () => {
+    const emailInput = document.getElementById('userEmail');
+    const errorElement = document.getElementById('userEmailError');
+
+    if (!emailInput.value.trim()) {
+        showFieldError(emailInput, errorElement, 'Email address is required');
+        return false;
+    }
+
+    // Email pattern validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(emailInput.value.trim())) {
+        showFieldError(emailInput, errorElement, 'Please enter a valid email address');
+        return false;
+    }
+
+    clearFieldError(emailInput, 'userEmailError');
+    emailInput.classList.add('is-valid');
+    return true;
+};
+
+/**
+ * Validate Phone Field
+ * @returns {boolean} True if valid, false otherwise
+ */
+const validatePhoneField = () => {
+    const phoneInput = document.getElementById('userPhone');
+    const errorElement = document.getElementById('userPhoneError');
+
+    if (!phoneInput.value.trim()) {
+        showFieldError(phoneInput, errorElement, 'Phone number is required');
+        return false;
+    }
+
+    // Remove all non-digit characters for validation
+    const digitsOnly = phoneInput.value.replace(/\D/g, '');
+
+    if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+        showFieldError(phoneInput, errorElement, 'Phone number must be between 7-15 digits');
+        return false;
+    }
+
+    clearFieldError(phoneInput, 'userPhoneError');
+    phoneInput.classList.add('is-valid');
+    return true;
+};
+
+/**
+ * Validate CAPTCHA Field
+ * Compares user input against dynamically generated question
+ * @returns {boolean} True if valid, false otherwise
+ */
+const validateCaptchaField = () => {
+    const captchaInput = document.getElementById('captchaAnswer');
+    const errorElement = document.getElementById('captchaError');
+
+    if (!captchaInput.value.trim()) {
+        showFieldError(captchaInput, errorElement, 'Please answer the verification question');
+        return false;
+    }
+
+    // Compare against current CAPTCHA answer
+    const correctAnswer = formTimingData.currentCaptcha ? formTimingData.currentCaptcha.answer : '8';
+    if (captchaInput.value.trim() !== correctAnswer) {
+        const question = formTimingData.currentCaptcha ? formTimingData.currentCaptcha.question : '5 + 3';
+        showFieldError(captchaInput, errorElement, `Incorrect answer. What is ${question}?`);
+        return false;
+    }
+
+    clearFieldError(captchaInput, 'captchaError');
+    captchaInput.classList.add('is-valid');
+    return true;
+};
+
+/* --------------------------------------------------------------------------
+   7. VALIDATE A SINGLE FIELD (Generic - for checkbox)
    -------------------------------------------------------------------------- */
 
 const validateField = (field) => {
@@ -330,22 +480,59 @@ const validateField = (field) => {
    -------------------------------------------------------------------------- */
 
 const validateForm = () => {
-    let allValid = true;
+    // Validate all fields using individual validation functions
+    const isNameValid = validateNameField();
+    const isEmailValid = validateEmailField();
+    const isPhoneValid = validatePhoneField();
+    const isCaptchaValid = validateCaptchaField();
 
-    Object.keys(VALIDATION_RULES).forEach((fieldId) => {
-        const field = document.getElementById(fieldId);
-        if (field && !validateField(field)) {
-            allValid = false;
-        }
-    });
+    // Validate checkbox using generic validateField
+    const checkboxField = document.getElementById('confirmHuman');
+    const isCheckboxValid = checkboxField ? validateField(checkboxField) : true;
 
-    return allValid;
+    return isNameValid && isEmailValid && isPhoneValid && isCaptchaValid && isCheckboxValid;
 };
 
 /* --------------------------------------------------------------------------
    8. ERROR / CLEAR HELPERS
    -------------------------------------------------------------------------- */
 
+/**
+ * Display field error state
+ * @param {HTMLElement} input - The input element
+ * @param {HTMLElement} errorElement - The error message element
+ * @param {string} errorMessage - The error message to display
+ */
+const showFieldError = (input, errorElement, errorMessage) => {
+    input.classList.add('is-invalid');
+    input.classList.remove('is-valid');
+
+    if (errorElement) {
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = 'block';
+    }
+
+    input.setAttribute('aria-invalid', 'true');
+};
+
+/**
+ * Clear field error state
+ * @param {HTMLElement} input - The input element
+ * @param {string} errorElementId - The error element ID
+ */
+const clearFieldError = (input, errorElementId) => {
+    input.classList.remove('is-invalid');
+
+    const errorElement = document.getElementById(errorElementId);
+    if (errorElement) {
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+    }
+
+    input.removeAttribute('aria-invalid');
+};
+
+// Backward compatibility aliases
 const showError = (field, message) => {
     field.classList.remove("is-valid");
     field.classList.add("is-invalid");
@@ -429,26 +616,45 @@ const formatPhoneNumber = (input) => {
    10. FORM-LEVEL SUCCESS / ERROR MESSAGES
    -------------------------------------------------------------------------- */
 
+/**
+ * Display success message
+ * @param {string} message - The success message
+ */
 const showSuccessMessage = (text) => {
-    const el = document.getElementById("formSuccess");
-    const span = document.getElementById("formSuccessText");
-    if (!el) return;
+    const container = document.getElementById('formMessages');
+    if (!container) return;
 
-    if (span) span.textContent = text;
-    el.classList.remove("d-none");
+    const successDiv = document.createElement('div');
+    successDiv.className = 'form-success-message show';
+    successDiv.setAttribute('role', 'alert');
+    successDiv.setAttribute('aria-live', 'polite');
+    successDiv.innerHTML = `<strong>Success!</strong> ${text}`;
 
-    // Hide the form itself
-    const form = document.getElementById("contactForm");
-    if (form) form.classList.add("d-none");
+    container.innerHTML = '';
+    container.appendChild(successDiv);
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        successDiv.classList.remove('show');
+    }, 5000);
 };
 
+/**
+ * Display error message
+ * @param {string} message - The error message
+ */
 const showErrorMessage = (text) => {
-    const el = document.getElementById("formError");
-    const span = document.getElementById("formErrorText");
-    if (!el) return;
+    const container = document.getElementById('formMessages');
+    if (!container) return;
 
-    if (span) span.textContent = text;
-    el.classList.remove("d-none");
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'form-error-message show';
+    errorDiv.setAttribute('role', 'alert');
+    errorDiv.setAttribute('aria-live', 'polite');
+    errorDiv.innerHTML = `<strong>Error!</strong> ${text}`;
+
+    container.innerHTML = '';
+    container.appendChild(errorDiv);
 };
 
 const hideFormMessages = () => {
