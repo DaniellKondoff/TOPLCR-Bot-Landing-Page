@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("TOPLCR Landing Page Initialized");
 
     initSmoothScroll();
+    initScrollIndicator();
+    initRippleEffect();
     initContactForm();
 });
 
@@ -33,6 +35,73 @@ const initSmoothScroll = () => {
         });
     });
 };
+
+/* --------------------------------------------------------------------------
+   1b. SCROLL INDICATOR
+   -------------------------------------------------------------------------- */
+
+const initScrollIndicator = () => {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    const nextSection = document.querySelector('#problem-solution');
+
+    if (scrollIndicator && nextSection) {
+        scrollIndicator.addEventListener('click', () => {
+            const targetTop = nextSection.getBoundingClientRect().top + window.pageYOffset;
+            const offset = 80;
+
+            window.scrollTo({
+                top: targetTop - offset,
+                behavior: 'smooth'
+            });
+        });
+    }
+};
+
+/* --------------------------------------------------------------------------
+   1c. CTA BUTTON RIPPLE EFFECT
+   -------------------------------------------------------------------------- */
+
+const initRippleEffect = () => {
+    const ctaButtons = document.querySelectorAll('.cta-button');
+
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple-animation 0.6s ease-out;
+                pointer-events: none;
+            `;
+
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+};
+
+// Add keyframe animation for ripple
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 
 /* --------------------------------------------------------------------------
    2. DYNAMIC MATH CAPTCHA
