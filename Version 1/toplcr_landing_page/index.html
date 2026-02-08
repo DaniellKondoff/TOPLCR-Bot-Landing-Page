@@ -341,134 +341,218 @@
     </section>
 
     <!-- CONTACT FORM SECTION -->
-    <section id="contact-form" class="contact-form-section py-5">
+    <section id="contact-form" class="contact-form-section" aria-label="Request free trial">
         <div class="container">
-            <!-- Centered Heading -->
-            <h2 class="contact-heading mb-5">Ready to Save 2-3 Hours Every Day?</h2>
-            
-            <!-- Contact Form Container -->
-            <div class="contact-form-wrapper">
-                <!-- Form Messages Container (hidden by default) -->
-                <div id="formMessages" class="form-messages-container"></div>
-                
-                <!-- Main Contact Form -->
-                <form id="contactForm" class="contact-form" novalidate>
-                    <!-- Name Field -->
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">Full Name</label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="userName" 
-                            name="userName"
-                            placeholder="John Smith" 
-                            required
-                            minlength="2"
-                            aria-label="Full Name"
-                            aria-required="true"
+            <!-- Section Header -->
+            <header class="contact-section-header">
+                <p class="contact-eyebrow">Get started today</p>
+                <h2 class="contact-heading">Ready to Save 2–3 Hours Every Day?</h2>
+                <p class="contact-sub">Start with 10–20 free operations. No credit card required.</p>
+            </header>
+
+            <!-- Two-Column Layout: Form + Benefits -->
+            <div class="contact-layout">
+                <!-- LEFT: Contact Form -->
+                <div class="contact-form-container">
+                    <!-- Form Messages Container (hidden by default) -->
+                    <div id="formMessages" class="form-messages-container"></div>
+
+                    <!-- Main Contact Form -->
+                    <form id="contactForm" class="contact-form" novalidate>
+                        <!-- Name Field -->
+                        <div class="form-field">
+                            <label for="userName" class="form-label">Full Name</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="userName"
+                                    name="userName"
+                                    placeholder="John Smith"
+                                    required
+                                    minlength="2"
+                                    aria-label="Full Name"
+                                    aria-required="true"
+                                >
+                            </div>
+                            <small class="form-error-text" id="userNameError"></small>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="form-field">
+                            <label for="userEmail" class="form-label">Work Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="userEmail"
+                                    name="userEmail"
+                                    placeholder="john@company.com"
+                                    required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                    aria-label="Work Email"
+                                    aria-required="true"
+                                >
+                            </div>
+                            <small class="form-error-text" id="userEmailError"></small>
+                        </div>
+
+                        <!-- Phone Field -->
+                        <div class="form-field">
+                            <label for="userPhone" class="form-label">Phone Number</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone input-icon" aria-hidden="true"></i>
+                                <input
+                                    type="tel"
+                                    class="form-control"
+                                    id="userPhone"
+                                    name="userPhone"
+                                    placeholder="+1234567890"
+                                    required
+                                    pattern="[0-9]{10,15}"
+                                    aria-label="Phone Number"
+                                    aria-required="true"
+                                >
+                            </div>
+                            <small class="form-error-text" id="userPhoneError"></small>
+                        </div>
+
+                        <!-- Message Field (Optional) -->
+                        <div class="form-field">
+                            <label for="userMessage" class="form-label">How can we help? <span class="optional-label">(Optional)</span></label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-comment-dots input-icon input-icon-textarea" aria-hidden="true"></i>
+                                <textarea
+                                    class="form-control"
+                                    id="userMessage"
+                                    name="userMessage"
+                                    placeholder="Tell us about your telecom sales challenges..."
+                                    rows="3"
+                                    aria-label="Message"
+                                ></textarea>
+                            </div>
+                            <small class="form-error-text" id="userMessageError"></small>
+                        </div>
+
+                        <!-- Honeypot Field (Hidden) - Catches Bots -->
+                        <div class="form-field" style="position: absolute; left: -9999px;">
+                            <label for="websiteUrl">Website</label>
+                            <input type="text" id="websiteUrl" name="websiteUrl" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- Dynamic Math CAPTCHA Field -->
+                        <div class="form-field">
+                            <label for="captchaAnswer" class="form-label">
+                                <i class="fas fa-shield-check" aria-hidden="true"></i>
+                                Human verification: <span id="captchaQuestion">What is 5 + 3?</span>
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="captchaAnswer"
+                                name="captchaAnswer"
+                                placeholder="Enter answer"
+                                required
+                                aria-label="CAPTCHA Answer"
+                                aria-required="true"
+                                autocomplete="off"
+                            >
+                            <small class="form-error-text" id="captchaAnswerError"></small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button
+                            type="submit"
+                            id="submitButton"
+                            class="btn btn-lg w-100 submit-button"
+                            aria-label="Request FREE Credits"
                         >
-                        <small class="form-error-text" id="userNameError"></small>
-                    </div>
+                            <span class="button-text">Get FREE Credits Now</span>
+                            <i class="fas fa-arrow-right button-icon" aria-hidden="true"></i>
+                        </button>
 
-                    <!-- Email Field -->
-                    <div class="mb-3">
-                        <label for="userEmail" class="form-label">Work Email</label>
-                        <input 
-                            type="email" 
-                            class="form-control" 
-                            id="userEmail" 
-                            name="userEmail"
-                            placeholder="john@company.com" 
-                            required
-                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                            aria-label="Work Email"
-                            aria-required="true"
-                        >
-                        <small class="form-error-text" id="userEmailError"></small>
-                    </div>
-
-                    <!-- Phone Field -->
-                    <div class="mb-3">
-                        <label for="userPhone" class="form-label">Phone Number</label>
-                        <input 
-                            type="tel" 
-                            class="form-control" 
-                            id="userPhone" 
-                            name="userPhone"
-                            placeholder="+1234567890" 
-                            required
-                            pattern="[0-9]{10,15}"
-                            aria-label="Phone Number"
-                            aria-required="true"
-                        >
-                        <small class="form-error-text" id="userPhoneError"></small>
-                    </div>
-
-                    <!-- Message Field (Optional) -->
-                    <div class="mb-3">
-                        <label for="userMessage" class="form-label">How can we help? (Optional)</label>
-                        <textarea 
-                            class="form-control" 
-                            id="userMessage" 
-                            name="userMessage"
-                            placeholder="Tell us about your telecom sales challenges..." 
-                            rows="4"
-                            aria-label="Message"
-                        ></textarea>
-                        <small class="form-error-text" id="userMessageError"></small>
-                    </div>
-
-                    <!-- Honeypot Field (Hidden) - Catches Bots -->
-                    <div class="mb-3" style="position: absolute; left: -9999px;">
-                        <label for="websiteUrl">Website</label>
-                        <input type="text" id="websiteUrl" name="websiteUrl" tabindex="-1" autocomplete="off">
-                    </div>
-
-                    <!-- Dynamic Math CAPTCHA Field -->
-                    <div class="mb-3">
-                        <label for="captchaAnswer" class="form-label">Human verification: <span id="captchaQuestion">What is 5 + 3?</span></label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="captchaAnswer" 
-                            name="captchaAnswer"
-                            placeholder="Enter answer" 
-                            required
-                            aria-label="CAPTCHA Answer"
-                            aria-required="true"
-                            autocomplete="off"
-                        >
-                        <small class="form-error-text" id="captchaAnswerError"></small>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button 
-                        type="submit" 
-                        id="submitButton" 
-                        class="btn btn-lg w-100 submit-button"
-                        aria-label="Request FREE Credits"
-                    >
-                        Request FREE Credits Now
-                    </button>
-                </form>
-
-                <!-- Trust Indicators -->
-                <div class="trust-indicators mt-4">
-                    <ul class="trust-list">
-                        <li>
-                            <span class="checkmark">✓</span>
-                            <span>No credit card required</span>
-                        </li>
-                        <li>
-                            <span class="checkmark">✓</span>
-                            <span>10-20 free operations included</span>
-                        </li>
-                        <li>
-                            <span class="checkmark">✓</span>
-                            <span>Get activated within 24 hours</span>
-                        </li>
-                    </ul>
+                        <!-- Privacy Note -->
+                        <p class="privacy-note">
+                            <i class="fas fa-lock" aria-hidden="true"></i>
+                            Your information is secure and will never be shared.
+                        </p>
+                    </form>
                 </div>
+
+                <!-- RIGHT: Benefits & Trust Indicators -->
+                <aside class="contact-benefits-container" aria-label="Benefits and guarantees">
+                    <!-- Value Proposition Card -->
+                    <div class="benefit-highlight-card">
+                        <div class="benefit-highlight-icon">
+                            <i class="fas fa-gift" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="benefit-highlight-title">Start Free Today</h3>
+                        <p class="benefit-highlight-text">Get 10–20 free operations to test all features. No commitment, no credit card needed.</p>
+                    </div>
+
+                    <!-- Trust Indicators List -->
+                    <div class="trust-features">
+                        <h4 class="trust-features-title">What you get:</h4>
+                        <ul class="trust-features-list">
+                            <li class="trust-feature-item">
+                                <div class="trust-feature-icon">
+                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                </div>
+                                <div class="trust-feature-content">
+                                    <strong>No credit card required</strong>
+                                    <p>Start testing immediately</p>
+                                </div>
+                            </li>
+                            <li class="trust-feature-item">
+                                <div class="trust-feature-icon">
+                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                </div>
+                                <div class="trust-feature-content">
+                                    <strong>10–20 free operations</strong>
+                                    <p>Full access to all features</p>
+                                </div>
+                            </li>
+                            <li class="trust-feature-item">
+                                <div class="trust-feature-icon">
+                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                </div>
+                                <div class="trust-feature-content">
+                                    <strong>24-hour activation</strong>
+                                    <p>Get started within one business day</p>
+                                </div>
+                            </li>
+                            <li class="trust-feature-item">
+                                <div class="trust-feature-icon">
+                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                </div>
+                                <div class="trust-feature-content">
+                                    <strong>Expert support included</strong>
+                                    <p>20 years of telecom experience</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Proof Stats -->
+                    <div class="social-proof-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">2–3</div>
+                            <div class="stat-label">Hours saved daily</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Operations available</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">24h</div>
+                            <div class="stat-label">Setup time</div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </div>
     </section>
