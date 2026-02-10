@@ -2839,6 +2839,11 @@ section {
     .hide-mobile { display: block !important; }
     .show-tablet { display: none !important; }
     .hide-tablet { display: block !important; }
+
+    /* Benefits heading on single line for desktop */
+    .benefits-heading {
+        white-space: nowrap;
+    }
 }
 
 /* ===================================
