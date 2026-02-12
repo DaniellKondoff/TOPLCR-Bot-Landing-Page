@@ -2006,7 +2006,7 @@ section {
     color: #FFFFFF;
     padding: 40px 0;
     border-top: 1px solid #444444;
-    margin-top: 80px;
+    margin-top: 0;
 }
 
 /* Footer Heading */
@@ -2489,7 +2489,7 @@ section {
     /* ===== FOOTER SECTION ===== */
     .footer-section {
         padding: 24px 0;
-        margin-top: 40px;
+        margin-top: 0;
     }
 
     .footer-heading {
