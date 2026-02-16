@@ -262,6 +262,62 @@ section {
     font-size: 1rem;
 }
 
+/* Feature Pills */
+.feature-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 48px;
+    padding: 0 20px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(26, 188, 156, 0.15);
+    border-radius: 20px;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #475569;
+    transition: all 0.25s ease;
+    cursor: default;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.feature-pill i {
+    color: var(--secondary-color);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.feature-pill:hover {
+    background: rgba(26, 188, 156, 0.08);
+    border-color: rgba(26, 188, 156, 0.35);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 188, 156, 0.15);
+}
+
+.feature-pill:hover i {
+    color: #0d9488;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .feature-pill:hover {
+        transform: none;
+    }
+}
+
 /* Video block */
 .video-wrapper {
     scroll-margin-top: 100px;
@@ -370,7 +426,24 @@ section {
         gap: 14px 20px;
         font-size: 0.8125rem;
     }
-    
+
+    .feature-pills {
+        margin-top: 24px;
+        margin-bottom: 36px;
+        gap: 8px;
+        padding: 0 12px;
+    }
+
+    .feature-pill {
+        padding: 7px 13px;
+        font-size: 0.75rem;
+        gap: 6px;
+    }
+
+    .feature-pill i {
+        font-size: 0.6875rem;
+    }
+
     .video-container {
         margin-bottom: 0;
     }
@@ -399,7 +472,25 @@ section {
         flex-direction: column;
         gap: 10px;
     }
-    
+
+    .feature-pills {
+        margin-top: 20px;
+        margin-bottom: 28px;
+        gap: 7px;
+        padding: 0 8px;
+    }
+
+    .feature-pill {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+        gap: 5px;
+        border-radius: 18px;
+    }
+
+    .feature-pill i {
+        font-size: 0.625rem;
+    }
+
     .trust-badge {
         font-size: 14px;
     }
@@ -2193,6 +2284,24 @@ section {
 
     .hero-trust {
         font-size: 0.8125rem;
+    }
+
+    .feature-pills {
+        margin-top: 20px;
+        margin-bottom: 28px;
+        gap: 7px;
+        padding: 0 8px;
+    }
+
+    .feature-pill {
+        padding: 6px 11px;
+        font-size: 0.6875rem;
+        gap: 5px;
+        border-radius: 18px;
+    }
+
+    .feature-pill i {
+        font-size: 0.625rem;
     }
 
     .trust-badge {
