@@ -2953,7 +2953,11 @@ section {
     .show-tablet { display: none !important; }
     .hide-tablet { display: block !important; }
 
-    /* Benefits heading on single line for desktop */
+    /* Benefits heading — single line on desktop */
+    .benefits-header {
+        max-width: 900px;
+    }
+
     .benefits-heading {
         white-space: nowrap;
     }
