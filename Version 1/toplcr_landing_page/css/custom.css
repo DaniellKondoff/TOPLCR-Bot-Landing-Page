@@ -1917,6 +1917,7 @@ section {
     line-height: 1.25;
     letter-spacing: -0.02em;
     margin-bottom: 12px;
+    white-space: nowrap;
 }
 
 .how-it-works-sub {
@@ -2027,6 +2028,7 @@ section {
     
     .how-it-works-heading {
         font-size: 1.625rem;
+        white-space: normal;
     }
     
     .how-it-works-sub {
@@ -2065,6 +2067,7 @@ section {
     
     .how-it-works-heading {
         font-size: 1.5rem;
+        white-space: normal;
     }
     
     .operation-card-inner {
