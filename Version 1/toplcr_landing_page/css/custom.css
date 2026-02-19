@@ -280,7 +280,7 @@ section {
 .feature-pill {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
@@ -297,7 +297,7 @@ section {
 
 .feature-pill i {
     color: var(--secondary-color);
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     flex-shrink: 0;
 }
 
@@ -437,11 +437,11 @@ section {
     .feature-pill {
         padding: 7px 13px;
         font-size: 0.75rem;
-        gap: 6px;
+        gap: 7px;
     }
 
     .feature-pill i {
-        font-size: 0.6875rem;
+        font-size: 1.1rem;
     }
 
     .video-container {
@@ -483,12 +483,12 @@ section {
     .feature-pill {
         padding: 6px 12px;
         font-size: 0.7rem;
-        gap: 5px;
+        gap: 6px;
         border-radius: 18px;
     }
 
     .feature-pill i {
-        font-size: 0.625rem;
+        font-size: 1rem;
     }
 
     .trust-badge {
@@ -2299,12 +2299,12 @@ section {
     .feature-pill {
         padding: 6px 11px;
         font-size: 0.6875rem;
-        gap: 5px;
+        gap: 6px;
         border-radius: 18px;
     }
 
     .feature-pill i {
-        font-size: 0.625rem;
+        font-size: 1rem;
     }
 
     .trust-badge {
